@@ -1,0 +1,32 @@
+C:\Users\usuario\Desktop\BackendObjetos\WebApiObjetos\bin\Debug\netcoreapp2.1\WebApiObjetos.deps.json
+C:\Users\usuario\Desktop\BackendObjetos\WebApiObjetos\bin\Debug\netcoreapp2.1\WebApiObjetos.runtimeconfig.json
+C:\Users\usuario\Desktop\BackendObjetos\WebApiObjetos\bin\Debug\netcoreapp2.1\WebApiObjetos.runtimeconfig.dev.json
+C:\Users\usuario\Desktop\BackendObjetos\WebApiObjetos\bin\Debug\netcoreapp2.1\WebApiObjetos.dll
+C:\Users\usuario\Desktop\BackendObjetos\WebApiObjetos\bin\Debug\netcoreapp2.1\WebApiObjetos.pdb
+C:\Users\usuario\Desktop\BackendObjetos\WebApiObjetos\obj\Debug\netcoreapp2.1\WebApiObjetos.csprojAssemblyReference.cache
+C:\Users\usuario\Desktop\BackendObjetos\WebApiObjetos\obj\Debug\netcoreapp2.1\WebApiObjetos.csproj.CoreCompileInputs.cache
+C:\Users\usuario\Desktop\BackendObjetos\WebApiObjetos\obj\Debug\netcoreapp2.1\WebApiObjetos.RazorAssemblyInfo.cache
+C:\Users\usuario\Desktop\BackendObjetos\WebApiObjetos\obj\Debug\netcoreapp2.1\WebApiObjetos.RazorAssemblyInfo.cs
+C:\Users\usuario\Desktop\BackendObjetos\WebApiObjetos\obj\Debug\netcoreapp2.1\WebApiObjetos.AssemblyInfoInputs.cache
+C:\Users\usuario\Desktop\BackendObjetos\WebApiObjetos\obj\Debug\netcoreapp2.1\WebApiObjetos.AssemblyInfo.cs
+C:\Users\usuario\Desktop\BackendObjetos\WebApiObjetos\obj\Debug\netcoreapp2.1\WebApiObjetos.RazorTargetAssemblyInfo.cache
+C:\Users\usuario\Desktop\BackendObjetos\WebApiObjetos\obj\Debug\netcoreapp2.1\WebApiObjetos.dll
+C:\Users\usuario\Desktop\BackendObjetos\WebApiObjetos\obj\Debug\netcoreapp2.1\WebApiObjetos.pdb
+C:\Users\usuario\Desktop\BackendObjetos\WebApiObjetos\obj\Debug\netcoreapp2.1\WebApiObjetos.Properties.Resources.resources
+C:\Users\usuario\Desktop\BackendObjetos\WebApiObjetos\obj\Debug\netcoreapp2.1\WebApiObjetos.csproj.GenerateResource.cache
+C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\BackendMyPlacesApp\WebApiObjetos\bin\Debug\netcoreapp2.1\WebApiObjetos.deps.json
+C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\BackendMyPlacesApp\WebApiObjetos\bin\Debug\netcoreapp2.1\WebApiObjetos.runtimeconfig.json
+C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\BackendMyPlacesApp\WebApiObjetos\bin\Debug\netcoreapp2.1\WebApiObjetos.runtimeconfig.dev.json
+C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\BackendMyPlacesApp\WebApiObjetos\bin\Debug\netcoreapp2.1\WebApiObjetos.dll
+C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\BackendMyPlacesApp\WebApiObjetos\bin\Debug\netcoreapp2.1\WebApiObjetos.pdb
+C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\BackendMyPlacesApp\WebApiObjetos\obj\Debug\netcoreapp2.1\WebApiObjetos.csprojAssemblyReference.cache
+C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\BackendMyPlacesApp\WebApiObjetos\obj\Debug\netcoreapp2.1\WebApiObjetos.Properties.Resources.resources
+C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\BackendMyPlacesApp\WebApiObjetos\obj\Debug\netcoreapp2.1\WebApiObjetos.csproj.GenerateResource.cache
+C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\BackendMyPlacesApp\WebApiObjetos\obj\Debug\netcoreapp2.1\WebApiObjetos.csproj.CoreCompileInputs.cache
+C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\BackendMyPlacesApp\WebApiObjetos\obj\Debug\netcoreapp2.1\WebApiObjetos.RazorAssemblyInfo.cache
+C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\BackendMyPlacesApp\WebApiObjetos\obj\Debug\netcoreapp2.1\WebApiObjetos.RazorAssemblyInfo.cs
+C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\BackendMyPlacesApp\WebApiObjetos\obj\Debug\netcoreapp2.1\WebApiObjetos.AssemblyInfoInputs.cache
+C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\BackendMyPlacesApp\WebApiObjetos\obj\Debug\netcoreapp2.1\WebApiObjetos.AssemblyInfo.cs
+C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\BackendMyPlacesApp\WebApiObjetos\obj\Debug\netcoreapp2.1\WebApiObjetos.RazorTargetAssemblyInfo.cache
+C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\BackendMyPlacesApp\WebApiObjetos\obj\Debug\netcoreapp2.1\WebApiObjetos.dll
+C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\BackendMyPlacesApp\WebApiObjetos\obj\Debug\netcoreapp2.1\WebApiObjetos.pdb

@@ -1,0 +1,15 @@
+version: '3.1'
+services:
+  database:
+    image: mcr.microsoft.com/mssql/server
+    container_name: database
+    ports:
+      - 2210:1433
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: 'Passw0rd@@'
+      MSSQL_PID: Developer
+    volumes:
+      - "InfoDB:/var/opt/mssql"
+volumes:
+  InfoDB:
