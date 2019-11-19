@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#27BC9C</color>
+    <color name="colorPrimaryDark">#27BC9C</color>
+    <color name="colorAccent">#27BC9C</color>
+    <color name ="Map_Green">#66388E3C</color>
+    <color name ="Map_Blue">#4D2F5BC9</color>
+
+    <color name ="Map_Red">#66E41C1C</color>
+
+
+    <color name ="Map_Yellow">#4DDBD21A</color>
+    <color name ="Map_Orange">#4DEE570B</color>
+
+    <color name ="Map_Purple">#4D9B49E0</color>
+
+</resources>

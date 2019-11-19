@@ -1,0 +1,154 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.trabajofinalobjetos15_7_2019"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="19"
+8-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="28" />
+9-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+11-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:5:5-79
+11-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:5:22-76
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:6:5-67
+12-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:6:22-64
+13    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+13-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:7:5-79
+13-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:7:22-76
+14    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+14-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:8:5-80
+14-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:8:22-77
+15    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+15-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:9:5-81
+15-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:9:22-78
+16
+17    <uses-feature
+17-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:11:5-13:35
+18        android:name="android.hardware.camera"
+18-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:12:9-47
+19        android:required="true" />
+19-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:13:9-32
+20    <uses-feature
+20-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\facundob\.gradle\caches\transforms-2\files-2.1\71410d59386dba98cbe61d29bc62f196\play-services-maps-17.0.0\AndroidManifest.xml:26:5-28:35
+21        android:glEsVersion="0x00020000"
+21-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\facundob\.gradle\caches\transforms-2\files-2.1\71410d59386dba98cbe61d29bc62f196\play-services-maps-17.0.0\AndroidManifest.xml:27:9-41
+22        android:required="true" />
+22-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\facundob\.gradle\caches\transforms-2\files-2.1\71410d59386dba98cbe61d29bc62f196\play-services-maps-17.0.0\AndroidManifest.xml:28:9-32
+23
+24    <application
+24-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:15:5-53:19
+25        android:allowBackup="true"
+25-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:16:9-35
+26        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+26-->[androidx.core:core:1.0.0] C:\Users\facundob\.gradle\caches\transforms-2\files-2.1\2ffb88316df49107418be0872d7babe4\core-1.0.0\AndroidManifest.xml:22:18-86
+27        android:debuggable="true"
+28        android:icon="@mipmap/ic_launcher"
+28-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:17:9-43
+29        android:label="@string/app_name"
+29-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:18:9-41
+30        android:roundIcon="@mipmap/pinglauncher"
+30-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:19:9-49
+31        android:supportsRtl="true"
+31-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:20:9-35
+32        android:theme="@style/AppTheme" >
+32-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:21:9-40
+33        <activity android:name="com.example.trabajofinalobjetos15_7_2019.PointsInAreaActivity" />
+33-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:22:9-67
+33-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:22:19-55
+34        <activity android:name="com.example.trabajofinalobjetos15_7_2019.LocationActivity" />
+34-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:23:9-54
+34-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:23:19-51
+35        <activity android:name="com.example.trabajofinalobjetos15_7_2019.SignInActivity" />
+35-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:24:9-52
+35-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:24:19-49
+36        <activity
+36-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:25:9-28:59
+37            android:name="com.example.trabajofinalobjetos15_7_2019.MapActivity"
+37-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:26:13-40
+38            android:label="@string/title_activity_prueba_menu"
+38-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:27:13-63
+39            android:theme="@style/AppTheme.NoActionBar" />
+39-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:28:13-56
+40        <activity
+40-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:29:9-37:20
+41            android:name="com.example.trabajofinalobjetos15_7_2019.LoginActivity"
+41-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:30:13-42
+42            android:label="@string/title_activity_login" >
+42-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:31:13-57
+43            <intent-filter>
+43-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:32:13-36:29
+44                <action android:name="android.intent.action.MAIN" />
+44-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:33:17-69
+44-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:33:25-66
+45
+46                <category android:name="android.intent.category.LAUNCHER" />
+46-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:35:17-77
+46-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:35:27-74
+47            </intent-filter>
+48        </activity>
+49
+50        <meta-data
+50-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:39:9-41:55
+51            android:name="com.google.android.geo.API_KEY"
+51-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:40:13-58
+52            android:value="@string/google_maps_key" />
+52-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:41:13-52
+53
+54        <provider
+54-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:44:9-52:20
+55            android:name="androidx.core.content.FileProvider"
+55-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:45:13-62
+56            android:authorities="com.example.android.fileprovider"
+56-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:46:13-67
+57            android:exported="false"
+57-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:47:13-37
+58            android:grantUriPermissions="true" >
+58-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:48:13-47
+59            <meta-data
+59-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:49:13-51:58
+60                android:name="android.support.FILE_PROVIDER_PATHS"
+60-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:50:17-67
+61                android:resource="@xml/provider_paths" />
+61-->C:\Users\facundob\Documents\TESIS\Entrega objetos Gonzalez-Alfaro\FinalObjetos\app\src\main\AndroidManifest.xml:51:17-55
+62        </provider>
+63        <!-- Needs to be explicitly declared on P+ -->
+64        <uses-library
+64-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\facundob\.gradle\caches\transforms-2\files-2.1\71410d59386dba98cbe61d29bc62f196\play-services-maps-17.0.0\AndroidManifest.xml:33:9-35:40
+65            android:name="org.apache.http.legacy"
+65-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\facundob\.gradle\caches\transforms-2\files-2.1\71410d59386dba98cbe61d29bc62f196\play-services-maps-17.0.0\AndroidManifest.xml:34:13-50
+66            android:required="false" />
+66-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\facundob\.gradle\caches\transforms-2\files-2.1\71410d59386dba98cbe61d29bc62f196\play-services-maps-17.0.0\AndroidManifest.xml:35:13-37
+67
+68        <activity
+68-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\facundob\.gradle\caches\transforms-2\files-2.1\291563c6708268cf4683b088770f2b39\play-services-base-17.0.0\AndroidManifest.xml:23:9-26:75
+69            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+69-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\facundob\.gradle\caches\transforms-2\files-2.1\291563c6708268cf4683b088770f2b39\play-services-base-17.0.0\AndroidManifest.xml:24:13-79
+70            android:exported="false"
+70-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\facundob\.gradle\caches\transforms-2\files-2.1\291563c6708268cf4683b088770f2b39\play-services-base-17.0.0\AndroidManifest.xml:25:13-37
+71            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+71-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\facundob\.gradle\caches\transforms-2\files-2.1\291563c6708268cf4683b088770f2b39\play-services-base-17.0.0\AndroidManifest.xml:26:13-72
+72
+73        <meta-data
+73-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\facundob\.gradle\caches\transforms-2\files-2.1\c905fed44d00124b8d0f2bca92214d04\play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
+74            android:name="com.google.android.gms.version"
+74-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\facundob\.gradle\caches\transforms-2\files-2.1\c905fed44d00124b8d0f2bca92214d04\play-services-basement-17.0.0\AndroidManifest.xml:24:13-58
+75            android:value="@integer/google_play_services_version" />
+75-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\facundob\.gradle\caches\transforms-2\files-2.1\c905fed44d00124b8d0f2bca92214d04\play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
+76
+77        <provider
+77-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\facundob\.gradle\caches\transforms-2\files-2.1\bba9e662e9f4bf0da774229f97b853fc\lifecycle-process-2.0.0\AndroidManifest.xml:23:9-27:43
+78            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
+78-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\facundob\.gradle\caches\transforms-2\files-2.1\bba9e662e9f4bf0da774229f97b853fc\lifecycle-process-2.0.0\AndroidManifest.xml:24:13-79
+79            android:authorities="com.example.trabajofinalobjetos15_7_2019.lifecycle-process"
+79-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\facundob\.gradle\caches\transforms-2\files-2.1\bba9e662e9f4bf0da774229f97b853fc\lifecycle-process-2.0.0\AndroidManifest.xml:25:13-69
+80            android:exported="false"
+80-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\facundob\.gradle\caches\transforms-2\files-2.1\bba9e662e9f4bf0da774229f97b853fc\lifecycle-process-2.0.0\AndroidManifest.xml:26:13-37
+81            android:multiprocess="true" />
+81-->[androidx.lifecycle:lifecycle-process:2.0.0] C:\Users\facundob\.gradle\caches\transforms-2\files-2.1\bba9e662e9f4bf0da774229f97b853fc\lifecycle-process-2.0.0\AndroidManifest.xml:27:13-40
+82    </application>
+83
+84</manifest>
