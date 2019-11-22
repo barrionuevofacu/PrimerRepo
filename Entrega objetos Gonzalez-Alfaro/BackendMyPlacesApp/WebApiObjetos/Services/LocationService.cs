@@ -1,7 +1,12 @@
 ﻿using GeoCoordinatePortable;
+using IBM.Cloud.SDK.Core.Authentication.Iam;
+using IBM.Cloud.SDK.Core.Http;
+using IBM.Watson.VisualRecognition.v3;
+using IBM.Watson.VisualRecognition.v3.Model;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApiObjetos.Domain;
@@ -77,6 +82,49 @@ namespace WebApiObjetos.Services
 
         public async Task<ImageDTO> AddImage(ImageDTO image)
         {
+            IamAuthenticator authenticator = new IamAuthenticator(apikey: "qcuAtCisP-Au2RPtxkVM1pU4NsYzxu_iPTw9WlYSbOaq");
+
+            VisualRecognitionService visualRecognition = new VisualRecognitionService("2018-03-19", authenticator);
+            visualRecognition.SetServiceUrl("https://gateway.watsonplatform.net/visual-recognition/api");
+            DetailedResponse<ClassifiedImages> result1;
+            string path = @"/tesistemp/MyTest.jpeg";
+            if (!File.Exists(path))
+            {
+                byte[] imageBytes = Convert.FromBase64String(image.Picture);
+                using (var imageFile = new FileStream(path, FileMode.Create))
+                {
+                    imageFile.Write(imageBytes, 0, imageBytes.Length);
+                    imageFile.Flush();
+                }
+            }
+            using (FileStream fs = File.OpenRead(@"/tesistemp/MyTest.jpeg"))
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    fs.CopyTo(ms);
+                    result1 = visualRecognition.Classify(
+                        //url: "https://img.pixers.pics/pho_wat(s3:700/FO/48/14/15/73/700_FO48141573_3b497c03f0d6755bb5657b67149c578d.jpg,700,507,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,480,457,jpg)/vinilos-para-armario-alaskan-malamute-en-la-nieve.jpg.jpg",
+                        imagesFilename: "MyTest.jpeg",
+                        imagesFile: ms,
+                        //threshold: 0.6f,
+                        owners: new List<string>() { "me" }
+                    );
+                }
+            }
+            //  The result object
+            var responseHeaders = result1.Headers;  //  The response headers
+            var responseJson = result1.Result;    //  The raw response JSON
+
+            var class1 = responseJson.Images.FirstOrDefault().Classifiers.FirstOrDefault().Classes.FirstOrDefault();
+            var raza = class1._Class;
+            var porcentaje = class1.Score;
+
+
+
+            var statusCode = result1.StatusCode;    //  The response status code
+            Console.WriteLine(result1.Response);
+            Console.WriteLine("La raza es: " + raza + ". Con una precision de: " + porcentaje);
+
             try
             {
                 return (await imageRepo.Add(image.ToEntity())).toDto();

@@ -50,38 +50,6 @@ namespace WebApiObjetos.Services
 
         public async Task<UserDTO> Login(UserDTO user)
         {
-            IamAuthenticator authenticator = new IamAuthenticator(apikey: "qcuAtCisP-Au2RPtxkVM1pU4NsYzxu_iPTw9WlYSbOaq");
-
-            VisualRecognitionService visualRecognition = new VisualRecognitionService("2018-03-19", authenticator);
-            visualRecognition.SetServiceUrl("https://gateway.watsonplatform.net/visual-recognition/api");
-            DetailedResponse<ClassifiedImages> result1;
-            using (FileStream fs = File.OpenRead("./Labrador_retriever_06457.jpg"))
-            {
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    fs.CopyTo(ms);
-                    result1 = visualRecognition.Classify(
-                        //url: "https://img.pixers.pics/pho_wat(s3:700/FO/48/14/15/73/700_FO48141573_3b497c03f0d6755bb5657b67149c578d.jpg,700,507,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,480,457,jpg)/vinilos-para-armario-alaskan-malamute-en-la-nieve.jpg.jpg",
-                        //imagesFilename: "Akita_00227.jpg",
-                        imagesFile: ms,
-                        //threshold: 0.6f,
-                        owners: new List<string>() { "me" }
-                    );
-                }
-            }
-            //  The result object
-            var responseHeaders = result1.Headers;  //  The response headers
-            var responseJson = result1.Result;    //  The raw response JSON
-
-            var class1 = responseJson.Images.FirstOrDefault().Classifiers.FirstOrDefault().Classes.FirstOrDefault();
-            var raza = class1._Class;
-            var porcentaje = class1.Score;
-
-
-
-            var statusCode = result1.StatusCode;    //  The response status code
-            Console.WriteLine(result1.Response);
-            Console.WriteLine("La raza es: " + raza + ". Con una precision de: " + porcentaje);
 
             var result = (await userRepo.FindBy(x => x.UserName == user.UserName && x.Password == user.Password)).First();
 
