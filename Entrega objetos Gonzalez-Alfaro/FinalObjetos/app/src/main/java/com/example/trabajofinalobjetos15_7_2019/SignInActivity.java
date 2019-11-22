@@ -34,6 +34,8 @@ public class SignInActivity extends AppCompatActivity {
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast toast1 = Toast.makeText(getApplicationContext(), "Complete all fields please", Toast.LENGTH_SHORT);
+                toast1.show();
                 if (TextUtils.isEmpty(userName.getText()) || TextUtils.isEmpty(password.getText()) || TextUtils.isEmpty(email.getText())) {
                     Toast toast = Toast.makeText(getApplicationContext(), "Complete all fields please", Toast.LENGTH_SHORT);
                     toast.show();

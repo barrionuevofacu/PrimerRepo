@@ -622,9 +622,9 @@
     <string name="abc_shareactionprovider_share_with_application">Share with <ns1:g example="Mail" id="application_name">%s</ns1:g></string>
     <string name="abc_toolbar_collapse_description">Collapse</string>
     <string name="action_settings">Settings</string>
-    <string name="app_name">Perros perdidos</string>
+    <string name="app_name">My Places App</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
-    <string name="base_Url">http://localhost:8180</string>
+    <string name="base_Url">http://192.168.0.201:5004</string>
     <string name="bottom_sheet_behavior" translatable="false">com.google.android.material.bottomsheet.BottomSheetBehavior</string>
     <string name="change_map">Change Map Type</string>
     <string name="character_counter_content_description">Character limit exceeded %1$d of %2$d</string>
@@ -650,12 +650,12 @@
     <string name="fab_transformation_scrim_behavior" translatable="false">com.google.android.material.transformation.FabTransformationScrimBehavior</string>
     <string name="fab_transformation_sheet_behavior" translatable="false">com.google.android.material.transformation.FabTransformationSheetBehavior</string>
     <string name="get_locations">Get Locations in Area</string>
-    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDi4b5SYX2UThp6sH_NawRTjsJTjvX7DVI</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyAA6SxNtAYciF7p59AdxDIZLBpWZyaaiU4</string>
     <string name="hide_bottom_view_on_scroll_behavior" translatable="false">com.google.android.material.behavior.HideBottomViewOnScrollBehavior</string>
     <string name="mtrl_chip_close_icon_content_description">Remove %1$s</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="nav_header_subtitle">Please choose which marker to add</string>
-    <string name="nav_header_title">Perros perdidos</string>
+    <string name="nav_header_title">My Places App</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="password_toggle_content_description">Show password</string>
@@ -667,9 +667,9 @@
     <string name="place_autocomplete_search_hint">Search</string>
     <string name="search_menu_title">Search</string>
     <string name="status_bar_notification_info_overflow">999+</string>
-    <string name="title_activity_login">Perros perdidos</string>
+    <string name="title_activity_login">My Places App</string>
     <string name="title_activity_maps">Map</string>
-    <string name="title_activity_prueba_menu">Perros perdidos</string>
+    <string name="title_activity_prueba_menu">My Places App</string>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light"/>
     <style name="Animation.AppCompat.Dialog" parent="Base.Animation.AppCompat.Dialog"/>

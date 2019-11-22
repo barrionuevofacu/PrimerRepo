@@ -30,7 +30,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/pinglauncher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:testOnly="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true" >
         <activity android:name="com.example.trabajofinalobjetos15_7_2019.PointsInAreaActivity" />
         <activity android:name="com.example.trabajofinalobjetos15_7_2019.LocationActivity" />
         <activity android:name="com.example.trabajofinalobjetos15_7_2019.SignInActivity" />

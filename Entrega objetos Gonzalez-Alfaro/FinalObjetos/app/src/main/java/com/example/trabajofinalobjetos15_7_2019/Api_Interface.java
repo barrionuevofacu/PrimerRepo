@@ -19,10 +19,7 @@ public interface Api_Interface {
     @POST("/api/User/SignIn")
     Call<UserDTO> signIn(@Body UserDTO user);
 
-    @GET("/tesis-api/api/app/health")
-    Call<String> health();
-    
-    @POST("/api/user/login")
+    @POST("/api/User/Login")
     Call<UserDTO> login(@Body UserDTO user);
 
     @POST("/api/Location/")
