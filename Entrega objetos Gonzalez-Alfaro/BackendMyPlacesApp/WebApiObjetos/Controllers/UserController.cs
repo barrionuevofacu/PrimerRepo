@@ -6,6 +6,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using IBM.Cloud.SDK.Core.Authentication.Iam;
+using IBM.Watson.VisualRecognition.v3;
+using IBM.Cloud.SDK.Core.Http;
+using IBM.Watson.VisualRecognition.v3.Model;
+using System.Collections.Generic;
+using System.IO;
 
 namespace WebApiObjetos.Controllers
 {
@@ -24,7 +30,6 @@ namespace WebApiObjetos.Controllers
         [Route("login"), AllowAnonymous]
         public async Task<IActionResult> Login(UserDTO user)
         {
-
             var obtainedUser = await userService.Login(user);
 
             if (obtainedUser == null)

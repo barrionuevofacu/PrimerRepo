@@ -37,6 +37,8 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast toast1 = Toast.makeText(getApplicationContext(), "Complete all fields please", Toast.LENGTH_SHORT);
+                toast1.show();
                 if (TextUtils.isEmpty(userNameTextView.getText()) || TextUtils.isEmpty(passwordTextView.getText())) {
                     Toast toast = Toast.makeText(getApplicationContext(), "Insert Username and Password", Toast.LENGTH_SHORT);
                     toast.show();
@@ -73,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                             return;
                         }
                     });
+
                 }
             }
         });

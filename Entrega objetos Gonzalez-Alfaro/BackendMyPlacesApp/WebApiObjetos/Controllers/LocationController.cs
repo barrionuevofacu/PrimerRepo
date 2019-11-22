@@ -23,7 +23,6 @@ namespace WebApiObjetos.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<ActionResult<LocationDTO>> Post([FromBody] LocationDTO location)
         {
             var userId = Int32.Parse(User.Claims.FirstOrDefault(x => x.Type.Equals("UserId")).Value);
@@ -46,7 +45,6 @@ namespace WebApiObjetos.Controllers
         }
 
         [HttpGet("{locationId}")]
-        [Authorize]
         public async Task<ActionResult<List<LocationDTO>>> GetLocation(int locationId)
         {
             var userId = Int32.Parse(User.Claims.FirstOrDefault(x => x.Type.Equals("UserId")).Value);
@@ -55,7 +53,6 @@ namespace WebApiObjetos.Controllers
         }
 
         [HttpDelete("{locationId}")]
-        [Authorize]
         public async Task<ActionResult<LocationDTO>> Delete([FromRoute]int locationId)
         {
 
@@ -69,7 +66,6 @@ namespace WebApiObjetos.Controllers
         }
 
         [HttpPut("{locationId}")]
-        [Authorize]
         public async Task<ActionResult<LocationDTO>> Update([FromRoute]int locationId, [FromBody] LocationDTO location)
         {
 
@@ -86,7 +82,6 @@ namespace WebApiObjetos.Controllers
 
         [HttpPost]
         [Route("Image")]
-        [Authorize]
         public async Task<ActionResult<ImageDTO>> PostImage([FromBody] ImageDTO image)
         {
 
@@ -115,21 +110,14 @@ namespace WebApiObjetos.Controllers
 
         [HttpPost]
         [Route("LocationsInArea")]
-        [Authorize]
         public async Task<ActionResult<ImageDTO>> GetLocationsInArea(LocationDTO location)
         {
             var userId = Int32.Parse(User.Claims.FirstOrDefault(x => x.Type.Equals("UserId")).Value);
 
-            var result = await locationsService.getLocationsInArea(location.Coordinates, userId);
+            var result = await locationsService.getLocationsInArea(location.Coordinates, 1);
 
             return Ok(result);
         }
 
-        [HttpGet]
-        [Route("health")]
-        public async Task<ActionResult<ImageDTO>> Health()
-        {
-            return Ok("");
-        }
     }
 }

@@ -1,16 +1,8 @@
-﻿using IBM.Cloud.SDK.Core.Authentication.Iam;
-using IBM.Cloud.SDK.Core.Http;
-using IBM.Cloud.SDK.Core.Http.Exceptions;
-using IBM.Watson.VisualRecognition.v3;
-using IBM.Watson.VisualRecognition.v3.Model;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -22,6 +14,8 @@ using WebApiObjetos.Models.Repositories;
 using WebApiObjetos.Models.Repositories.Interfaces;
 using WebApiObjetos.Properties;
 using WebApiObjetos.Services.Interfaces;
+
+
 
 namespace WebApiObjetos.Services
 {
