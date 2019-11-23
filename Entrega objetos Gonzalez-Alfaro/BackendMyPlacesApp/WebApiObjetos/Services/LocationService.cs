@@ -106,6 +106,7 @@ namespace WebApiObjetos.Services
                         //url: "https://img.pixers.pics/pho_wat(s3:700/FO/48/14/15/73/700_FO48141573_3b497c03f0d6755bb5657b67149c578d.jpg,700,507,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,480,457,jpg)/vinilos-para-armario-alaskan-malamute-en-la-nieve.jpg.jpg",
                         imagesFilename: "MyTest.jpeg",
                         imagesFile: ms,
+                        classifierIds: new List<string>() { "Clasificaperros_187924846" },
                         //threshold: 0.6f,
                         owners: new List<string>() { "me" }
                     );
@@ -114,14 +115,12 @@ namespace WebApiObjetos.Services
             //  The result object
             var responseHeaders = result1.Headers;  //  The response headers
             var responseJson = result1.Result;    //  The raw response JSON
-
+            var statusCode = result1.StatusCode;
             var class1 = responseJson.Images.FirstOrDefault().Classifiers.FirstOrDefault().Classes.FirstOrDefault();
-            var raza = class1._Class;
+            var raza1 = class1._Class;
             var porcentaje = class1.Score;
-
-
-
-            var statusCode = result1.StatusCode;    //  The response status code
+            var raza = raza1.Split(".")[1];
+            image.raza1 = raza;
             Console.WriteLine(result1.Response);
             Console.WriteLine("La raza es: " + raza + ". Con una precision de: " + porcentaje);
 
