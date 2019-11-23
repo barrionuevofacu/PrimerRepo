@@ -88,15 +88,19 @@ namespace WebApiObjetos.Services
             visualRecognition.SetServiceUrl("https://gateway.watsonplatform.net/visual-recognition/api");
             DetailedResponse<ClassifiedImages> result1;
             string path = @"/tesistemp/MyTest.jpeg";
-            if (!File.Exists(path))
-            {
-                byte[] imageBytes = Convert.FromBase64String(image.Picture);
-                using (var imageFile = new FileStream(path, FileMode.Create))
-                {
-                    imageFile.Write(imageBytes, 0, imageBytes.Length);
-                    imageFile.Flush();
-                }
+            if (File.Exists(path)){
+                File.Delete(path);
             }
+
+            //GUARDA IMAGEN EN DIRECTORIO
+            byte[] imageBytes = Convert.FromBase64String(image.Picture);
+            using (var imageFile = new FileStream(path, FileMode.Create))
+            {
+                imageFile.Write(imageBytes, 0, imageBytes.Length);
+                imageFile.Flush();
+            }
+
+            //PREDICE LA RAZA
             using (FileStream fs = File.OpenRead(@"/tesistemp/MyTest.jpeg"))
             {
                 using (MemoryStream ms = new MemoryStream())
