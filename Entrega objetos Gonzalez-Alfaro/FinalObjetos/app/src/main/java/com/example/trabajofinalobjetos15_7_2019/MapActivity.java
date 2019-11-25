@@ -123,7 +123,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
             refreshList = savedInstanceState.getParcelableArrayList("points");
             activeMethod = savedInstanceState.getInt("activeMethod");
         } else {
-            String welcome = "Welcome " + getIntent().getStringExtra("username") + " !";
+            String welcome = "Bienvenido/a " + getIntent().getStringExtra("username") + " !";
            Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_SHORT).show();
         }
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -350,12 +350,6 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
 
         if (id == R.id.Add_Location) {
             addLocation();
-        } else if (id == R.id.Add_Line) {
-            addLine();
-        } else if (id == R.id.Add_Polgyon) {
-            addPolygon();
-        } else if (id == R.id.Change_map) {
-            changeMapType();
         } else if (id == R.id.getlocations){
             getLocationsInArea();
         }

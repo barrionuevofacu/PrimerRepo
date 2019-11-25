@@ -9,18 +9,6 @@
             android:icon="@drawable/ic_ping"
             android:title="@string/AddLocation" />
         <item
-            android:id="@+id/Add_Line"
-            android:icon="@drawable/ic_line"
-            android:title="@string/AddLine" />
-        <item
-            android:id="@+id/Add_Polgyon"
-            android:icon="@drawable/id_gps"
-            android:title="@string/AddPolygon" />
-        <item
-            android:id="@+id/Change_map"
-            android:icon="@drawable/id_map"
-            android:title="@string/change_map" />
-        <item
             android:id="@+id/getlocations"
             android:icon="@drawable/id_getlocations"
             android:title="@string/get_locations"/>

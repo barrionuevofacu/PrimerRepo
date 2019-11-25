@@ -37,10 +37,8 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast toast1 = Toast.makeText(getApplicationContext(), "Complete all fields please", Toast.LENGTH_SHORT);
-                toast1.show();
                 if (TextUtils.isEmpty(userNameTextView.getText()) || TextUtils.isEmpty(passwordTextView.getText())) {
-                    Toast toast = Toast.makeText(getApplicationContext(), "Insert Username and Password", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(getApplicationContext(), "Inserte usuario y contraseña", Toast.LENGTH_SHORT);
                     toast.show();
                 } else {
                     UserDTO user = new UserDTO(userNameTextView.getText().toString(), passwordTextView.getText().toString(), "");
@@ -55,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<UserDTO> call, Response<UserDTO> response) {
                             if (!response.isSuccessful()) {
-                                Toast toast = Toast.makeText(getApplicationContext(), "Wrong Password", Toast.LENGTH_SHORT);
+                                Toast toast = Toast.makeText(getApplicationContext(), "Contraseña inválida", Toast.LENGTH_SHORT);
                                 toast.show();
                                 return;
                             }
@@ -70,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<UserDTO> call, Throwable t) {
-                            Toast toast = Toast.makeText(getApplicationContext(), "Service failure", Toast.LENGTH_SHORT);
+                            Toast toast = Toast.makeText(getApplicationContext(), "Falla de servicio", Toast.LENGTH_SHORT);
                             toast.show();
                             return;
                         }

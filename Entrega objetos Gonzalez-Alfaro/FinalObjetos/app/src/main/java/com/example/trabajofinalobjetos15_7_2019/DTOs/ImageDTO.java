@@ -8,6 +8,8 @@ public class ImageDTO {
     private int id ;
     @SerializedName("picture")
     private String Picture;
+    @SerializedName("raza1")
+    private String raza1;
 
     public int getId() {
         return id;
@@ -25,6 +27,8 @@ public class ImageDTO {
         Picture = picture;
     }
 
+    public String getRaza1() { return raza1; }
 
+    public void setRaza1(String raza1) { this.raza1 = raza1; }
 
 }

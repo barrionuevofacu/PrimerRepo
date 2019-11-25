@@ -51,7 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Username"
+                    android:hint="Usuario"
                     android:inputType="textPersonName" />
 
                 <EditText
@@ -59,7 +59,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Password"
+                    android:hint="Contraseña"
                     android:inputType="textPassword" />
 
 
@@ -76,8 +76,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/colorPrimary"
-                    android:textColor="#FFFFFF"
-                    android:text="Sign In !" />
+                    android:text="Registrarme"
+                    android:textColor="#FFFFFF" />
             </LinearLayout>
 
         </LinearLayout>
