@@ -9,7 +9,7 @@
     <string name="nav_header_subtitle">Publicá o buscá un perro perdido</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-    <string name="base_Url">http://192.168.0.54:5004</string>
+    <string name="base_Url">http://192.168.0.201:5004</string>
     <string-array name="planets_array">
         <item>Green</item>
         <item>Blue</item>
