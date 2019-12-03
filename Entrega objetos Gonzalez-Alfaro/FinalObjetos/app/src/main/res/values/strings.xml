@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Perros perdidos</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_login">Perros perdidos</string>
+    <string name="title_activity_prueba_menu">Perros perdidos</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Perros perdidos</string>
+    <string name="nav_header_subtitle">Publicá o buscá un perro perdido</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="base_Url">http://192.168.0.83:5004</string>
+    <string-array name="planets_array">
+        <item>Green</item>
+        <item>Blue</item>
+        <item>Red</item>
+        <item>Yellow</item>
+        <item>Orange</item>
+        <item>Purple</item>
+    </string-array>
+    <string name="AddLocation">Encontré un perro</string>
+    <string name="get_locations">Perros en la zona</string>
+</resources>
