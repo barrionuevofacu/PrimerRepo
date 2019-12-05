@@ -43,6 +43,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -86,13 +87,13 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
     private List<LatLng> refreshList;
     private int activeMethod = 3;
     private int mapType = MAP_TYPE_NORMAL;
-
+    ArrayList<String> stringListArea = new ArrayList<>();
     private boolean savedInstance = false; // para saber si dirijo la camara a donde esta el usuario o no.
     private GoogleMap mMap;
     private Button confirmButton;
     private Button editButton;
     private ImageView gpsWidget;
-
+    private Boolean vieneDePuntosEnArea = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,22 +110,35 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
         });
         token = "bearer " + getIntent().getStringExtra("Token");
         refreshList = new ArrayList<>();
+        stringListArea = getIntent().getStringArrayListExtra("imgs");
 
+        if (stringListArea != null && stringListArea.size()>0){
+            for (String str : stringListArea) {
+                vieneDePuntosEnArea = true;
+                String [] listPoint = str.split(":");
+                String lat = listPoint[listPoint.length-1].split(",")[0];
+                String lng = listPoint[listPoint.length-1].split(",")[1];
+                LatLng nltlng = new LatLng(Double.parseDouble(lat),Double.parseDouble(lng));
+                refreshList.add(nltlng);
+            }
+        }
         confirmButton.setVisibility(View.INVISIBLE);
         editButton.setVisibility(View.INVISIBLE);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        if (savedInstanceState != null) {
-            savedInstance = true;
-            mLastKnownLocation = savedInstanceState.getParcelable(KEY_LOCATION);
-            confirmButton.setVisibility(savedInstanceState.getInt("confirmButton"));
-            mapType = savedInstanceState.getInt("mapType");
-            refreshList = savedInstanceState.getParcelableArrayList("points");
-            activeMethod = savedInstanceState.getInt("activeMethod");
-        } else {
-            String welcome = "Bienvenido/a " + getIntent().getStringExtra("username") + " !";
-           Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_SHORT).show();
+        if (!vieneDePuntosEnArea){
+            if (savedInstanceState != null) {
+                savedInstance = true;
+                mLastKnownLocation = savedInstanceState.getParcelable(KEY_LOCATION);
+                confirmButton.setVisibility(savedInstanceState.getInt("confirmButton"));
+                mapType = savedInstanceState.getInt("mapType");
+                refreshList = savedInstanceState.getParcelableArrayList("points");
+                activeMethod = savedInstanceState.getInt("activeMethod");
+            } else {
+                String welcome = "Bienvenido/a " + getIntent().getStringExtra("username") + " !";
+               Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_SHORT).show();
+            }
         }
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 

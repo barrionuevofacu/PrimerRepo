@@ -39,8 +39,7 @@ namespace WebApiObjetos.Controllers
         [HttpGet]
         public async Task<ActionResult<List<LocationDTO>>> Get()
         {
-            var userId = Int32.Parse(User.Claims.FirstOrDefault(x => x.Type.Equals("UserId")).Value);
-            var result = await locationsService.GetLocations(userId);
+            var result = await locationsService.GetLocations();
             return Ok(result);
         }
 
@@ -98,12 +97,9 @@ namespace WebApiObjetos.Controllers
 
         [HttpGet]
         [Route("Image/{imageId}")]
-        [Authorize]
         public async Task<ActionResult<ImageDTO>> GetImage(int imageId)
         {
-            var userId = Int32.Parse(User.Claims.FirstOrDefault(x => x.Type.Equals("UserId")).Value);
-
-            var result = await locationsService.GetImage(imageId, userId);
+            var result = await locationsService.GetImage(imageId);
 
             return Ok(result);
         }
@@ -112,9 +108,8 @@ namespace WebApiObjetos.Controllers
         [Route("LocationsInArea")]
         public async Task<ActionResult<ImageDTO>> GetLocationsInArea(LocationDTO location)
         {
-            var userId = Int32.Parse(User.Claims.FirstOrDefault(x => x.Type.Equals("UserId")).Value);
 
-            var result = await locationsService.getLocationsInArea(location.Coordinates, 1);
+            var result = await locationsService.getLocationsInArea(location.Coordinates);
 
             return Ok(result);
         }

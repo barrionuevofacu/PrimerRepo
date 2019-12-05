@@ -86,14 +86,14 @@ public class LocationDTO {
     }
 
     public String getData() {
-        String data = "id: " + this.id + '\n';
-        data += "userId: " + this.userId + '\n';
-        data += "tag: " + this.tag + '\n';
-        data += "color: " + this.color + '\n';
-        data += "type: " + this.type + '\n';
+        String data = "id: " + this.id + ':';
+        data += "userId: " + this.userId + ':';
+        data += "tag: " + this.tag + ':';
+        data += "color: " + this.color + ':';
+        data += "type: " + this.type + ':';
         data += "coordinates: ";
         for (String location : this.coordinates.split(";")) {
-            data += location + '\n';
+            data += location + ',';
         }
         return data;
     }

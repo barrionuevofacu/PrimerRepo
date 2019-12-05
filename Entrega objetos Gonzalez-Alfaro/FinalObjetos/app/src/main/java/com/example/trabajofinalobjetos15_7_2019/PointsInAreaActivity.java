@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -50,7 +51,12 @@ public class PointsInAreaActivity extends AppCompatActivity {
                     for (LocationDTO l : locations)
                         stringList.add(l.getData());
                 }
-                initRecyclerView(stringList);
+                //LLAMO AL ACTIVITY DEL MAPA
+                Intent intent = new Intent(PointsInAreaActivity.this, MapActivity.class);
+                intent.putExtra("imgs", stringList);
+                intent.putExtra("Token", getIntent().getStringExtra("token"));
+                startActivityForResult(intent, 2);
+                //initRecyclerView(stringList);
             }
 
             @Override

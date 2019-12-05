@@ -42,9 +42,9 @@ namespace WebApiObjetos.Services
         }
 
 
-        public async Task<List<LocationDTO>> GetLocations(int userId)
+        public async Task<List<LocationDTO>> GetLocations()
         {
-            var locations = await locationRepo.FindBy(x => x.UserId.Equals(userId));
+            var locations = await locationRepo.GetAll();
             List<LocationDTO> locationsDTO = new List<LocationDTO>();
             foreach (Location location in locations)
             {
@@ -138,9 +138,9 @@ namespace WebApiObjetos.Services
             }
         }
 
-        public async Task<ImageDTO> GetImage(int imageId, int userId)
+        public async Task<ImageDTO> GetImage(int imageId)
         {
-            var result = await imageRepo.FindBy(x => x.Id.Equals(imageId) && x.UserId.Equals(userId));
+            var result = await imageRepo.FindBy(x => x.Id.Equals(imageId));
 
             if (result.Count > 0)
                 return result.First().toDto();
@@ -148,9 +148,9 @@ namespace WebApiObjetos.Services
         }
 
 
-        public async Task<List<LocationDTO>> getLocationsInArea(string coordinates, int userId)
+        public async Task<List<LocationDTO>> getLocationsInArea(string coordinates)
         {
-            var userLocations = await this.GetLocations(userId);
+            var userLocations = await this.GetLocations();
 
             List<GeoCoordinate> AreaCoordinates = getPoints(coordinates);
 
