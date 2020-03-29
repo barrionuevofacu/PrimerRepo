@@ -31,6 +31,9 @@ public interface Api_Interface {
     @GET("api/Location/")
     Call<List<LocationDTO>> getLocations(@Header("Authorization") String token );
 
+    @POST("api/Location/LocationsById")
+    Call<List<LocationDTO>> getLocationsById(@Body List<String> locations, @Header("Authorization") String token );
+
     @DELETE("api/Location/{location}")
     Call<String> deleteLocation(@Path("location") int locationId, @Header("Authorization") String token);
 

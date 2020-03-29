@@ -39,7 +39,16 @@ namespace WebApiObjetos.Controllers
         [HttpGet]
         public async Task<ActionResult<List<LocationDTO>>> Get()
         {
-            var result = await locationsService.GetLocations();
+            var userId = Int32.Parse(User.Claims.FirstOrDefault(x => x.Type.Equals("UserId")).Value);
+            var result = await locationsService.GetLocations(userId);
+            return Ok(result);
+        }
+
+        [HttpPost]
+        [Route("LocationsById")]
+        public async Task<ActionResult<List<LocationDTO>>> GetLocationsById([FromBody] List<String> locations, int userId)
+        {
+            var result = await locationsService.GetLocationsById(locations);
             return Ok(result);
         }
 
@@ -108,8 +117,9 @@ namespace WebApiObjetos.Controllers
         [Route("LocationsInArea")]
         public async Task<ActionResult<ImageDTO>> GetLocationsInArea(LocationDTO location)
         {
+            var userId = Int32.Parse(User.Claims.FirstOrDefault(x => x.Type.Equals("UserId")).Value);
 
-            var result = await locationsService.getLocationsInArea(location.Coordinates);
+            var result = await locationsService.getLocationsInArea(location.Coordinates, userId);
 
             return Ok(result);
         }

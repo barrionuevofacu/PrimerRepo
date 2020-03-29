@@ -8,7 +8,9 @@ namespace WebApiObjetos.Services.Interfaces
 {
     public interface ILocationService
     {
-        Task<List<LocationDTO>> GetLocations();
+        Task<List<LocationDTO>> GetLocations(int userId);
+
+        Task<List<LocationDTO>> GetLocationsById(List<String> locations);
 
         Task<LocationDTO> GetLocation(int userId, int locationId);
 
@@ -22,7 +24,7 @@ namespace WebApiObjetos.Services.Interfaces
 
         Task<ImageDTO> GetImage(int imageId);
 
-        Task<List<LocationDTO>> getLocationsInArea(string coordinates);
+        Task<List<LocationDTO>> getLocationsInArea(string coordinates, int userId);
 
     }
 }

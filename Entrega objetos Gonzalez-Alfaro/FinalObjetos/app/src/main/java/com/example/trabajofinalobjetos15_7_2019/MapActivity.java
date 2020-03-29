@@ -374,7 +374,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
 
     public void getLocationsInArea(){
         activeMethod = 4;
-        Toast.makeText(getApplicationContext(), "Please select vertexes for the area", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Seleccione los vértices del área", Toast.LENGTH_SHORT).show();
         setPolygonsClickable(false);
         setPolylinesClickable(false);
         confirmButton.setVisibility(View.VISIBLE);
@@ -401,11 +401,11 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                     polygon.setStrokeColor(getResources().getColor(R.color.Map_Red));
                     polygon.setClickable(false);
                     clearPointsList(pointsToAddList);
-                    confirmButton.setText("View Points");
+                    confirmButton.setText("Ver perros");
                     confirmButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            confirmButton.setText("Confirm");
+                            confirmButton.setText("Confirmar");
                             confirmButton.setVisibility(View.INVISIBLE);
                             String coordinates = "";
                             for(LatLng coordinate : polygon.getPoints())
@@ -427,7 +427,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                         }
                     });
                 } else
-                    Toast.makeText(getApplicationContext(), "Please select another point for the area", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Seleccione otro vértice del área", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -565,7 +565,13 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         api = retrofit.create(Api_Interface.class);
-        Call<List<LocationDTO>> call = api.getLocations(token);
+        Call<List<LocationDTO>> call;
+        if (!vieneDePuntosEnArea) {
+            call = api.getLocations(token);
+        }
+        else{
+            call = api.getLocationsById(stringListArea, token);
+        }
         call.enqueue(new Callback<List<LocationDTO>>() {
             @Override
             public void onResponse(Call<List<LocationDTO>> call, Response<List<LocationDTO>> response) {

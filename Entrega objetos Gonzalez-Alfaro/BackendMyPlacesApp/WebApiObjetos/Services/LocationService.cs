@@ -42,15 +42,28 @@ namespace WebApiObjetos.Services
         }
 
 
-        public async Task<List<LocationDTO>> GetLocations()
+        public async Task<List<LocationDTO>> GetLocations(int userId)
         {
-            var locations = await locationRepo.GetAll();
+            var locations = await locationRepo.FindBy(x => x.UserId.Equals(userId));
             List<LocationDTO> locationsDTO = new List<LocationDTO>();
             foreach (Location location in locations)
             {
                 locationsDTO.Add(location.toDto());
             }
             return locationsDTO;
+        }
+
+        public async Task<List<LocationDTO>> GetLocationsById(List<String> locations)
+        {
+            List<LocationDTO> result = new List<LocationDTO>();
+            foreach (String l in locations)
+            {
+                int id;
+                Int32.TryParse(l.Split(":")[1], out id);
+                var location = await locationRepo.FindBy(x => x.Id.Equals(id));
+                result.Add(location.First().toDto());
+            }
+            return result;
         }
 
         public async Task<LocationDTO> AddLocation(LocationDTO location)
@@ -147,10 +160,21 @@ namespace WebApiObjetos.Services
             return null;
         }
 
-
-        public async Task<List<LocationDTO>> getLocationsInArea(string coordinates)
+        public async Task<List<LocationDTO>> GetLocationsNoPropias(int userId)
         {
-            var userLocations = await this.GetLocations();
+            var locations = await locationRepo.FindBy(x => !x.UserId.Equals(userId));
+            List<LocationDTO> locationsDTO = new List<LocationDTO>();
+            foreach (Location location in locations)
+            {
+                locationsDTO.Add(location.toDto());
+            }
+            return locationsDTO;
+        }
+
+
+        public async Task<List<LocationDTO>> getLocationsInArea(string coordinates, int userId)
+        {
+            var userLocations = await this.GetLocationsNoPropias(userId);
 
             List<GeoCoordinate> AreaCoordinates = getPoints(coordinates);
 
