@@ -46,7 +46,7 @@ public class PointsInAreaActivity extends AppCompatActivity {
                 List<LocationDTO> locations = response.body();
                 ArrayList<String> stringList = new ArrayList<>();
                 if (locations.size() == 0)
-                    stringList.add("There are no locations in the selected area");
+                    stringList.add("No se encontraron perros en el area seleccionada");
                 else {
                     for (LocationDTO l : locations)
                         stringList.add(l.getData());
