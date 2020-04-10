@@ -109,8 +109,10 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                 getDeviceLocation();
             }
         });
-        token = "bearer " + getIntent().getStringExtra("Token");
-        refreshList = new ArrayList<>();
+        token = getIntent().getStringExtra("Token");
+        if (!token.contains("bearer"))
+            token = "bearer " + token;
+                    refreshList = new ArrayList<>();
         stringListArea = getIntent().getStringArrayListExtra("imgs");
 
         if (stringListArea != null && stringListArea.size()>0){
@@ -240,6 +242,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
             @Override
             public void onMapClick(LatLng latLng) {
                 editButton.setVisibility(View.INVISIBLE);
+                verButton.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -372,6 +375,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                     @Override
                     public void onMapClick(LatLng latLng) {
                         editButton.setVisibility(View.INVISIBLE);
+                        verButton.setVisibility(View.INVISIBLE);
                     }
                 });
             }
@@ -382,6 +386,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         editButton.setVisibility(View.INVISIBLE);
+        verButton.setVisibility(View.INVISIBLE);
         clearPointsList(pointsToAddList);
         int id = item.getItemId();
 
@@ -441,6 +446,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                                 @Override
                                 public void onMapClick(LatLng latLng) {
                                     editButton.setVisibility(View.INVISIBLE);
+                                    verButton.setVisibility(View.INVISIBLE);
                                 }
                             });
                             Intent i = new Intent(MapActivity.this, PointsInAreaActivity.class);
@@ -712,6 +718,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                             @Override
                             public void onMapClick(LatLng latLng) {
                                 editButton.setVisibility(View.INVISIBLE);
+                                verButton.setVisibility(View.INVISIBLE);
                             }
                         });
 
@@ -766,6 +773,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                         @Override
                         public void onMapClick(LatLng latLng) {
                             editButton.setVisibility(View.INVISIBLE);
+                            verButton.setVisibility(View.INVISIBLE);
                         }
                     });
                     switch (data.getShortExtra("type", (short) 0)) {
@@ -784,6 +792,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                             }
                             locationToAdd.setId(locationsHash.get(polyline).getId());
                             editButton.setVisibility(View.INVISIBLE);
+                            verButton.setVisibility(View.INVISIBLE);
                             polyline.setColor(data.getIntExtra("color", getResources().getColor(R.color.Map_Green)));
                             polyline.setTag(data.getStringExtra("tag"));
                             if (locationToAdd.getImageId() == 0)
@@ -864,6 +873,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                             }
                             Toast.makeText(getApplicationContext(), response.body(), Toast.LENGTH_SHORT).show();
                             editButton.setVisibility(View.INVISIBLE);
+                            verButton.setVisibility(View.INVISIBLE);
                         }
 
                         @Override
