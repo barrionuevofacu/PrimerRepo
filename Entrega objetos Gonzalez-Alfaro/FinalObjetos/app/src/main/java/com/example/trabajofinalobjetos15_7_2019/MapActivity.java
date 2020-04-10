@@ -92,6 +92,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
     private GoogleMap mMap;
     private Button confirmButton;
     private Button editButton;
+    private Button verButton;
     private ImageView gpsWidget;
     private Boolean vieneDePuntosEnArea = false;
     @Override
@@ -101,7 +102,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
         gpsWidget = findViewById(R.id.id_gps);
         editButton = findViewById(R.id.editButton);
         confirmButton = findViewById(R.id.ConfirmButton);
-
+        verButton = findViewById(R.id.VerButton);
         gpsWidget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,6 +125,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
         }
         confirmButton.setVisibility(View.INVISIBLE);
         editButton.setVisibility(View.INVISIBLE);
+        verButton.setVisibility(View.INVISIBLE);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -188,21 +190,42 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                     return true;
                 } else {
                     if (!(confirmButton.getVisibility() == View.VISIBLE)) {
-                        editButton.setVisibility(View.VISIBLE);
-                        editButton.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                marker = clickedMarker;
-                                Intent intent = new Intent(MapActivity.this, LocationActivity.class);
-                                intent.putExtra("type", 0);
-                                intent.putExtra("color", getResources().getColor(R.color.Map_Red));
-                                intent.putExtra("tag", clickedMarker.getTag().toString());
-                                intent.putExtra("isNew", false);
-                                intent.putExtra("imageId", locationsHash.get(marker).getImageId());
-                                intent.putExtra("token", token);
-                                startActivityForResult(intent, 2);
-                            }
-                        });
+                        if (vieneDePuntosEnArea){
+                            verButton.setVisibility(View.VISIBLE);
+                            verButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    marker = clickedMarker;
+                                    Intent intent = new Intent(MapActivity.this, LocationActivity.class);
+                                    intent.putExtra("type", 0);
+                                    intent.putExtra("color", getResources().getColor(R.color.Map_Red));
+                                    intent.putExtra("tag", clickedMarker.getTag().toString());
+                                    intent.putExtra("isNew", false);
+                                    intent.putExtra("imageId", locationsHash.get(marker).getImageId());
+                                    intent.putExtra("token", token);
+                                    intent.putExtra("soloVista", true);
+                                    startActivityForResult(intent, 2);
+                                }
+                            });
+                        }
+                        else{
+                            editButton.setVisibility(View.VISIBLE);
+                            editButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    marker = clickedMarker;
+                                    Intent intent = new Intent(MapActivity.this, LocationActivity.class);
+                                    intent.putExtra("type", 0);
+                                    intent.putExtra("color", getResources().getColor(R.color.Map_Red));
+                                    intent.putExtra("tag", clickedMarker.getTag().toString());
+                                    intent.putExtra("isNew", false);
+                                    intent.putExtra("imageId", locationsHash.get(marker).getImageId());
+                                    intent.putExtra("token", token);
+                                    intent.putExtra("soloVista", false);
+                                    startActivityForResult(intent, 2);
+                                }
+                            });
+                        }
                     }
                         Toast.makeText(getApplicationContext(), clickedMarker.getTag().toString(), Toast.LENGTH_SHORT).show();
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(clickedMarker.getPosition(), mMap.getCameraPosition().zoom));
@@ -434,7 +457,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
 
     public void addLocation(){
         activeMethod = 0;
-        Toast.makeText(getApplicationContext(), "Please select which location to add", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Marque ubicación del perro encontrado/visto", Toast.LENGTH_SHORT).show();
         setPolygonsClickable(false);
         setPolylinesClickable(false);
         confirmButton.setVisibility(View.VISIBLE);

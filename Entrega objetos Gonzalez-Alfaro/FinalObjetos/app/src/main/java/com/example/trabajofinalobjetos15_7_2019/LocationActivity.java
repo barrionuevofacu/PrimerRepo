@@ -57,6 +57,7 @@ public class LocationActivity extends AppCompatActivity implements AdapterView.O
     private String currentPhotoPath;
     private int imageId;
     private String token;
+    private Boolean soloVista;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,12 +68,18 @@ public class LocationActivity extends AppCompatActivity implements AdapterView.O
         tagTextView = findViewById(R.id.tagTextView);
         Button deleteLocationButton = findViewById(R.id.DeleteButton);
         Button saveLocationButton = findViewById(R.id.SaveButton);
-
+        soloVista = getIntent().getBooleanExtra("soloVista",false);
         boolean isNew = getIntent().getBooleanExtra("isNew", true);
         colorSelection = (getIntent().getIntExtra("color", 0));
         imageId = getIntent().getIntExtra("imageId", 0);
         token = getIntent().getStringExtra("token");
         tagTextView.setText(getIntent().getStringExtra("tag"));
+        if (soloVista){
+            tagTextView.setEnabled(false);
+            deleteLocationButton.setVisibility(View.INVISIBLE);
+            saveLocationButton.setVisibility(View.INVISIBLE);
+            camButton.setVisibility(View.INVISIBLE);
+        }
         currentPhotoPath = "";
 
         if (savedInstanceState != null) {

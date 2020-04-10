@@ -29,17 +29,27 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@color/colorPrimary"
-    android:text="Confirm"
+    android:text="Confirmar"
     android:textColor="#FFFFFF"
     app:layout_anchor="@+id/include"
     app:layout_anchorGravity="end|bottom" />
+
+    <Button
+        android:id="@+id/VerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="Ver"
+        android:textColor="#FFFFFF"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="end|bottom" />
 
     <Button
         android:id="@+id/editButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:text="Edit"
+        android:text="Editar"
         android:textColor="#FFFFFF"
         app:layout_anchor="@+id/include"
         app:layout_anchorGravity="end|bottom" />
