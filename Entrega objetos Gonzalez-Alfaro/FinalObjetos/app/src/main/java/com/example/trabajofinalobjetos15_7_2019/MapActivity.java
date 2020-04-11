@@ -92,6 +92,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
     private GoogleMap mMap;
     private Button confirmButton;
     private Button editButton;
+    private Button verButton;
     private ImageView gpsWidget;
     private Boolean vieneDePuntosEnArea = false;
     @Override
@@ -101,29 +102,37 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
         gpsWidget = findViewById(R.id.id_gps);
         editButton = findViewById(R.id.editButton);
         confirmButton = findViewById(R.id.ConfirmButton);
-
+        verButton = findViewById(R.id.VerButton);
         gpsWidget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getDeviceLocation();
             }
         });
-        token = "bearer " + getIntent().getStringExtra("Token");
+        token = getIntent().getStringExtra("Token");
+        if (!token.contains("bearer"))
+            token = "bearer " + token;
+
         refreshList = new ArrayList<>();
         stringListArea = getIntent().getStringArrayListExtra("imgs");
-
-        if (stringListArea != null && stringListArea.size()>0){
-            for (String str : stringListArea) {
-                vieneDePuntosEnArea = true;
-                String [] listPoint = str.split(":");
-                String lat = listPoint[listPoint.length-1].split(",")[0];
-                String lng = listPoint[listPoint.length-1].split(",")[1];
-                LatLng nltlng = new LatLng(Double.parseDouble(lat),Double.parseDouble(lng));
-                refreshList.add(nltlng);
+        vieneDePuntosEnArea = getIntent().getBooleanExtra("vieneDePointsInArea",false);
+        if (vieneDePuntosEnArea){
+            if (stringListArea != null && stringListArea.size()>0){
+                for (String str : stringListArea) {
+                    String [] listPoint = str.split(":");
+                    String lat = listPoint[listPoint.length-1].split(",")[0];
+                    String lng = listPoint[listPoint.length-1].split(",")[1];
+                    LatLng nltlng = new LatLng(Double.parseDouble(lat),Double.parseDouble(lng));
+                    refreshList.add(nltlng);
+                }
+            }
+            else{
+                Toast.makeText(getApplicationContext(), "No se encontraron perros en el area seleccionada", Toast.LENGTH_SHORT).show();
             }
         }
         confirmButton.setVisibility(View.INVISIBLE);
         editButton.setVisibility(View.INVISIBLE);
+        verButton.setVisibility(View.INVISIBLE);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -188,21 +197,42 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                     return true;
                 } else {
                     if (!(confirmButton.getVisibility() == View.VISIBLE)) {
-                        editButton.setVisibility(View.VISIBLE);
-                        editButton.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                marker = clickedMarker;
-                                Intent intent = new Intent(MapActivity.this, LocationActivity.class);
-                                intent.putExtra("type", 0);
-                                intent.putExtra("color", getResources().getColor(R.color.Map_Red));
-                                intent.putExtra("tag", clickedMarker.getTag().toString());
-                                intent.putExtra("isNew", false);
-                                intent.putExtra("imageId", locationsHash.get(marker).getImageId());
-                                intent.putExtra("token", token);
-                                startActivityForResult(intent, 2);
-                            }
-                        });
+                        if (vieneDePuntosEnArea){
+                            verButton.setVisibility(View.VISIBLE);
+                            verButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    marker = clickedMarker;
+                                    Intent intent = new Intent(MapActivity.this, LocationActivity.class);
+                                    intent.putExtra("type", 0);
+                                    intent.putExtra("color", getResources().getColor(R.color.Map_Red));
+                                    intent.putExtra("tag", clickedMarker.getTag().toString());
+                                    intent.putExtra("isNew", false);
+                                    intent.putExtra("imageId", locationsHash.get(marker).getImageId());
+                                    intent.putExtra("token", token);
+                                    intent.putExtra("soloVista", true);
+                                    startActivityForResult(intent, 2);
+                                }
+                            });
+                        }
+                        else{
+                            editButton.setVisibility(View.VISIBLE);
+                            editButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    marker = clickedMarker;
+                                    Intent intent = new Intent(MapActivity.this, LocationActivity.class);
+                                    intent.putExtra("type", 0);
+                                    intent.putExtra("color", getResources().getColor(R.color.Map_Red));
+                                    intent.putExtra("tag", clickedMarker.getTag().toString());
+                                    intent.putExtra("isNew", false);
+                                    intent.putExtra("imageId", locationsHash.get(marker).getImageId());
+                                    intent.putExtra("token", token);
+                                    intent.putExtra("soloVista", false);
+                                    startActivityForResult(intent, 2);
+                                }
+                            });
+                        }
                     }
                         Toast.makeText(getApplicationContext(), clickedMarker.getTag().toString(), Toast.LENGTH_SHORT).show();
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(clickedMarker.getPosition(), mMap.getCameraPosition().zoom));
@@ -217,6 +247,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
             @Override
             public void onMapClick(LatLng latLng) {
                 editButton.setVisibility(View.INVISIBLE);
+                verButton.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -349,6 +380,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                     @Override
                     public void onMapClick(LatLng latLng) {
                         editButton.setVisibility(View.INVISIBLE);
+                        verButton.setVisibility(View.INVISIBLE);
                     }
                 });
             }
@@ -359,6 +391,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         editButton.setVisibility(View.INVISIBLE);
+        verButton.setVisibility(View.INVISIBLE);
         clearPointsList(pointsToAddList);
         int id = item.getItemId();
 
@@ -420,6 +453,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                                 @Override
                                 public void onMapClick(LatLng latLng) {
                                     editButton.setVisibility(View.INVISIBLE);
+                                    verButton.setVisibility(View.INVISIBLE);
                                 }
                             });
                             Intent i = new Intent(MapActivity.this, PointsInAreaActivity.class);
@@ -436,7 +470,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
 
     public void addLocation(){
         activeMethod = 0;
-        Toast.makeText(getApplicationContext(), "Please select which location to add", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Marque ubicación del perro encontrado/visto", Toast.LENGTH_SHORT).show();
         setPolygonsClickable(false);
         setPolylinesClickable(false);
         confirmButton.setVisibility(View.VISIBLE);
@@ -594,49 +628,52 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         api = retrofit.create(Api_Interface.class);
-        Call<List<LocationDTO>> call;
+        Call<List<LocationDTO>> call = null;
         if (!vieneDePuntosEnArea) {
             call = api.getLocations(token);
         }
         else{
-            call = api.getLocationsById(stringListArea, token);
+            if(stringListArea != null)
+                call = api.getLocationsById(stringListArea, token);
         }
-        call.enqueue(new Callback<List<LocationDTO>>() {
-            @Override
-            public void onResponse(Call<List<LocationDTO>> call, Response<List<LocationDTO>> response) {
-                if (!response.isSuccessful()) {
-                    Toast.makeText(getApplicationContext(), "Error obtaining user locations", Toast.LENGTH_SHORT).show();
+        if (call != null){
+            call.enqueue(new Callback<List<LocationDTO>>() {
+                @Override
+                public void onResponse(Call<List<LocationDTO>> call, Response<List<LocationDTO>> response) {
+                    if (!response.isSuccessful()) {
+                        Toast.makeText(getApplicationContext(), "Error obtaining user locations", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    List<LocationDTO> locations = response.body();
+                    for (LocationDTO location : locations) {
+                        generateLocation(location);
+                    }
+                    switch (activeMethod) {
+                        case 0: {
+                            addLocation();
+                            break;
+                        }
+                        case 1: {
+                            addLine();
+                            break;
+                        }
+                        case 2: {
+                            addPolygon();
+                            break;
+                        }
+                        case 4:{
+                            getLocationsInArea();
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<LocationDTO>> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(), "Service failure", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                List<LocationDTO> locations = response.body();
-                for (LocationDTO location : locations) {
-                    generateLocation(location);
-                }
-                switch (activeMethod) {
-                    case 0: {
-                        addLocation();
-                        break;
-                    }
-                    case 1: {
-                        addLine();
-                        break;
-                    }
-                    case 2: {
-                        addPolygon();
-                        break;
-                    }
-                    case 4:{
-                        getLocationsInArea();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<LocationDTO>> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Service failure", Toast.LENGTH_SHORT).show();
-                return;
-            }
-        });
+            });
+        }
     }
 
     public void generateLocation(LocationDTO location) {
@@ -718,6 +755,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                             @Override
                             public void onMapClick(LatLng latLng) {
                                 editButton.setVisibility(View.INVISIBLE);
+                                verButton.setVisibility(View.INVISIBLE);
                             }
                         });
 
@@ -843,6 +881,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                         @Override
                         public void onMapClick(LatLng latLng) {
                             editButton.setVisibility(View.INVISIBLE);
+                            verButton.setVisibility(View.INVISIBLE);
                         }
                     });
                     switch (data.getShortExtra("type", (short) 0)) {
@@ -861,6 +900,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                             }
                             locationToAdd.setId(locationsHash.get(polyline).getId());
                             editButton.setVisibility(View.INVISIBLE);
+                            verButton.setVisibility(View.INVISIBLE);
                             polyline.setColor(data.getIntExtra("color", getResources().getColor(R.color.Map_Green)));
                             polyline.setTag(data.getStringExtra("tag"));
                             if (locationToAdd.getImageId() == 0)
@@ -941,6 +981,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                             }
                             Toast.makeText(getApplicationContext(), response.body(), Toast.LENGTH_SHORT).show();
                             editButton.setVisibility(View.INVISIBLE);
+                            verButton.setVisibility(View.INVISIBLE);
                         }
 
                         @Override
