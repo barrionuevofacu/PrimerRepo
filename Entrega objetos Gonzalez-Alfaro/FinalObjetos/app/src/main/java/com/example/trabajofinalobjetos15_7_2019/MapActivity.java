@@ -95,6 +95,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
     private Button verButton;
     private ImageView gpsWidget;
     private Boolean vieneDePuntosEnArea = false;
+    private Boolean trajoUbicaciones = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,6 +119,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
         vieneDePuntosEnArea = getIntent().getBooleanExtra("vieneDePointsInArea",false);
         if (vieneDePuntosEnArea){
             if (stringListArea != null && stringListArea.size()>0){
+                trajoUbicaciones = true;
                 for (String str : stringListArea) {
                     String [] listPoint = str.split(":");
                     String lat = listPoint[listPoint.length-1].split(",")[0];
@@ -127,6 +129,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                 }
             }
             else{
+                trajoUbicaciones = false;
                 Toast.makeText(getApplicationContext(), "No se encontraron perros en el area seleccionada", Toast.LENGTH_SHORT).show();
             }
         }
@@ -197,7 +200,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                     return true;
                 } else {
                     if (!(confirmButton.getVisibility() == View.VISIBLE)) {
-                        if (vieneDePuntosEnArea){
+                        if (vieneDePuntosEnArea && trajoUbicaciones){
                             verButton.setVisibility(View.VISIBLE);
                             verButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -487,9 +490,9 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
             @Override
             public void onClick(View v) {
                 if (pointsToAddList.isEmpty())
-                    Toast.makeText(getApplicationContext(), "Please select location to add", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Marque ubicación del perro encontrado/visto", Toast.LENGTH_SHORT).show();
                 else
-                    startLocationActivity(0, getResources().getColor(R.color.Map_Red), "New Tag", 0, token, true, 1);
+                    startLocationActivity(0, getResources().getColor(R.color.Map_Red), "Descripción", 0, token, true, 1);
             }
         });
     }
@@ -600,7 +603,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                 .build();
         api = retrofit.create(Api_Interface.class);
         Call<List<LocationDTO>> call = null;
-        if (!vieneDePuntosEnArea) {
+        if (!vieneDePuntosEnArea || (vieneDePuntosEnArea && !trajoUbicaciones)) {
             call = api.getLocations(token);
         }
         else{
