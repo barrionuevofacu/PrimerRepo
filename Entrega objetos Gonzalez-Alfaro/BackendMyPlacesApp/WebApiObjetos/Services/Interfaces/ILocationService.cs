@@ -16,6 +16,8 @@ namespace WebApiObjetos.Services.Interfaces
 
         Task<LocationDTO> AddLocation(LocationDTO location);
 
+        Task<List<LocationDTO>> Buscar(LocationDTO location);
+
         Task<bool> DeleteLocation(int userId, int locationId);
 
         Task<bool> UpdateLocation(LocationDTO location);

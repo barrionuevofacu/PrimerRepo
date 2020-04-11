@@ -36,6 +36,21 @@ namespace WebApiObjetos.Controllers
                 return Conflict("Ha ocurrido un error guardando su ubicación");
         }
 
+        [HttpPost]
+        [Route("Search")]
+        public async Task<ActionResult<List<LocationDTO>>> Search ([FromBody] LocationDTO location)
+        {
+            var userId = Int32.Parse(User.Claims.FirstOrDefault(x => x.Type.Equals("UserId")).Value);
+            location.UserId = userId;
+
+            var result = await locationsService.Buscar(location);
+
+            if (result != null)
+                return Ok(result);
+            else
+                return Conflict("Ha ocurrido un error guardando su ubicación");
+        }
+
         [HttpGet]
         public async Task<ActionResult<List<LocationDTO>>> Get()
         {

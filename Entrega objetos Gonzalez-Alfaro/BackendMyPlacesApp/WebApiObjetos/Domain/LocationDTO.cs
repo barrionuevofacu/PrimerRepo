@@ -26,7 +26,10 @@ namespace WebApiObjetos.Domain
 
         [DataMember]
         public Nullable<int> ImageId { get; set; }
-        
+
+        [DataMember]
+        public bool IsSearch { get; set; }
+
         public Location ToEntity()
         {
             return new Location
@@ -37,7 +40,8 @@ namespace WebApiObjetos.Domain
                 Color = this.Color,
                 Coordinates = this.Coordinates,
                 Type = this.Type,
-                ImageId = this.ImageId
+                ImageId = this.ImageId,
+                IsSearch = this.IsSearch
             };
 
         }
