@@ -13,6 +13,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -67,7 +68,7 @@ public class LocationActivity extends AppCompatActivity implements AdapterView.O
         camButton = findViewById(R.id.imageViewCam);
         tagTextView = findViewById(R.id.tagTextView);
         Button deleteLocationButton = findViewById(R.id.DeleteButton);
-        Button saveLocationButton = findViewById(R.id.SaveButton);
+        final Button saveLocationButton = findViewById(R.id.SaveButton);
         soloVista = getIntent().getBooleanExtra("soloVista",false);
         boolean isNew = getIntent().getBooleanExtra("isNew", true);
         colorSelection = (getIntent().getIntExtra("color", 0));
@@ -175,7 +176,7 @@ public class LocationActivity extends AppCompatActivity implements AdapterView.O
         saveLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                saveLocationButton.setEnabled(false);
                 if (!currentPhotoPath.isEmpty()) {
                     Retrofit retrofit = new Retrofit.Builder()
                             .baseUrl(getResources().getString(R.string.base_Url))
@@ -203,12 +204,14 @@ public class LocationActivity extends AppCompatActivity implements AdapterView.O
                             i.putExtra("imageId", response.body().getId());
                             LocationActivity.this.setResult(RESULT_OK, i);
                             LocationActivity.this.finish();
+                            saveLocationButton.setEnabled(true);
                         }
 
                         @Override
                         public void onFailure(Call<ImageDTO> call, Throwable t) {
                             Toast toast = Toast.makeText(getApplicationContext(), "Service failure", Toast.LENGTH_SHORT);
                             toast.show();
+                            saveLocationButton.setEnabled(true);
                         }
                     });
                 } else {
@@ -219,6 +222,7 @@ public class LocationActivity extends AppCompatActivity implements AdapterView.O
                     i.putExtra("delete", false);
                     LocationActivity.this.setResult(RESULT_OK, i);
                     LocationActivity.this.finish();
+                    saveLocationButton.setEnabled(true);
                 }
             }
 
