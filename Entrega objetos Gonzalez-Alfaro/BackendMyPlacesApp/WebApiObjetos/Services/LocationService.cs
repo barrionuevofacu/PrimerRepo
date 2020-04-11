@@ -100,7 +100,7 @@ namespace WebApiObjetos.Services
             VisualRecognitionService visualRecognition = new VisualRecognitionService("2018-03-19", authenticator);
             visualRecognition.SetServiceUrl("https://gateway.watsonplatform.net/visual-recognition/api");
             DetailedResponse<ClassifiedImages> result1;
-            string path = @"/tesistemp/MyTest.jpeg";
+            string path = @"/Users/lauta/TESIS/MyTest.jpeg";
             if (File.Exists(path)){
                 File.Delete(path);
             }
@@ -114,7 +114,7 @@ namespace WebApiObjetos.Services
             }
 
             //PREDICE LA RAZA
-            using (FileStream fs = File.OpenRead(@"/tesistemp/MyTest.jpeg"))
+            using (FileStream fs = File.OpenRead(path))
             {
                 using (MemoryStream ms = new MemoryStream())
                 {
@@ -150,7 +150,33 @@ namespace WebApiObjetos.Services
                 return null;
             }
         }
-
+        public async Task<List<LocationDTO>> Buscar(LocationDTO location)
+        {
+            try
+            {
+                if (location.ImageId == 0 || location.ImageId == null)
+                    return null;
+                location.IsSearch = true;
+                await locationRepo.Add(location.ToEntity());
+                Image image = await imageRepo.GetById((int)location.ImageId);
+                List<Image> images = imageRepo.FindBy(x => x.raza1 == image.raza1).Result.ToList();
+                List<LocationDTO> result = new List<LocationDTO>();
+                foreach (Image i in images)
+                {
+                    if (i.Id != location.ImageId)
+                    {
+                        var loc = locationRepo.FindBy(x => x.ImageId == i.Id).Result.FirstOrDefault();
+                        if (loc != null && !loc.IsSearch)
+                            result.Add(loc.toDto());
+                    }
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
         public async Task<ImageDTO> GetImage(int imageId)
         {
             var result = await imageRepo.FindBy(x => x.Id.Equals(imageId));

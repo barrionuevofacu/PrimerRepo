@@ -22,6 +22,8 @@ namespace WebApiObjetos.Models.Entities
 
         public Nullable<int> ImageId { get; set; }
 
+        public bool IsSearch { get; set; }
+
         public LocationDTO toDto()
         {
             return new LocationDTO
@@ -32,7 +34,8 @@ namespace WebApiObjetos.Models.Entities
                 Coordinates = this.Coordinates,
                 Tag = this.Tag,
                 Type = this.Type,
-                ImageId = this.ImageId
+                ImageId = this.ImageId,
+                IsSearch = this.IsSearch
             };
         }
 

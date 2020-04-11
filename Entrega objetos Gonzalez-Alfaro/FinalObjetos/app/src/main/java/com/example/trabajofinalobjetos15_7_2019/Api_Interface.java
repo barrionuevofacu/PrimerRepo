@@ -46,4 +46,7 @@ public interface Api_Interface {
     @GET("/api/Location/image/{imageId}")
     Call<ImageDTO> getImage(@Path("imageId") int imageId, @Header("Authorization") String token );
 
+    @POST("/api/Location/Search")
+    Call<List<LocationDTO>> searchLocation(@Body LocationDTO location, @Header("Authorization") String token);
+
 }

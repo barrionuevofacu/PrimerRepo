@@ -402,6 +402,8 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
             addLocation();
         } else if (id == R.id.getlocations){
             getLocationsInArea();
+        } else if (id == R.id.search){
+            search();
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -493,6 +495,33 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                     Toast.makeText(getApplicationContext(), "Marque ubicación del perro encontrado/visto", Toast.LENGTH_SHORT).show();
                 else
                     startLocationActivity(0, getResources().getColor(R.color.Map_Red), "Descripción", 0, token, true, 1);
+            }
+        });
+    }
+    public void search(){
+        activeMethod = 0;
+        Toast.makeText(getApplicationContext(), "Please select which location to search a dog", Toast.LENGTH_SHORT).show();
+        setPolygonsClickable(false);
+        setPolylinesClickable(false);
+        confirmButton.setVisibility(View.VISIBLE);
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                if (pointsToAddList.size() > 0) {
+                    pointsToAddList.get(0).remove();
+                    pointsToAddList.remove(0);
+                }
+                marker = mMap.addMarker(new MarkerOptions().position(latLng).title("Marker Title"));
+                pointsToAddList.add(marker);
+            }
+        });
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (pointsToAddList.isEmpty())
+                    Toast.makeText(getApplicationContext(), "Please select location to add", Toast.LENGTH_SHORT).show();
+                else
+                    startSearchActivity(0, getResources().getColor(R.color.Map_Red), "New Tag", 0, token, true, 11);
             }
         });
     }
@@ -778,7 +807,78 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                         return;
                     }
                 });
-            } else {
+            } else if (requestCode == 11) {
+                for (Marker marker : pointsToAddList) {
+                    locationToAdd.setCoordinates(locationToAdd.getCoordinates() + extractLocationString(marker.getPosition()));
+                }
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl(getResources().getString(R.string.base_Url))
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+                api = retrofit.create(Api_Interface.class);
+                Call<List<LocationDTO>> call = api.searchLocation(locationToAdd, token);
+                call.enqueue(new Callback<List<LocationDTO>>() {
+                    @Override
+                    public void onResponse(Call<List<LocationDTO>> call, Response<List<LocationDTO>> response) {
+                        if (!response.isSuccessful()) {
+                            Toast.makeText(getApplicationContext(), "Unable to save location", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        confirmButton.setVisibility(View.INVISIBLE);
+                        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                            @Override
+                            public void onMapClick(LatLng latLng) {
+                                editButton.setVisibility(View.INVISIBLE);
+                            }
+                        });
+//
+//                        switch (response.body().getType()) {
+//                            case 0: {
+//                                marker.setTag(response.body().getTag());
+//                                locationsHash.put(marker, response.body());
+//                                break;
+//                            }
+//                            case 1: {
+//                                PolylineOptions polyOptions = new PolylineOptions().clickable(true);
+//                                for (Marker marker : pointsToAddList) {
+//                                    polyOptions.add(marker.getPosition());
+//                                }
+//                                polyline = mMap.addPolyline(polyOptions);
+//                                polyline.setColor(response.body().getColor());
+//                                polyline.setTag(response.body().getTag());
+//                                locationsHash.put(polyline, response.body());
+//                                polylineList.add(polyline);
+//                                break;
+//                            }
+//                            case 2: {
+//                                PolygonOptions polyOptions = new PolygonOptions().clickable(true);
+//                                for (Marker marker : pointsToAddList) {
+//                                    polyOptions.add(marker.getPosition());
+//                                }
+//                                polygon = mMap.addPolygon(polyOptions);
+//                                polygon.setTag(response.body().getTag());
+//                                polygon.setFillColor(response.body().getColor());
+//                                polygon.setStrokeColor(response.body().getColor());
+//                                locationsHash.put(polygon, response.body());
+//                                polygonList.add(polygon);
+//                                break;
+//                            }
+//                        }
+                        activeMethod = 3;
+//                        setPolygonsClickable(true);
+//                        setPolylinesClickable(true);
+//                        clearPointsList(pointsToAddList);
+//                        Toast.makeText(getApplicationContext(), "Location Saved Successfully", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<LocationDTO>> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "Service failure", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                });
+            }
+            else {
                 if (!data.getBooleanExtra("delete", true)) {
                     mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                         @Override
@@ -909,6 +1009,17 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
 
     private void startLocationActivity(int type, int color, String tag,int imageId, String token, boolean isNew, int requestCode){
         Intent intent = new Intent(MapActivity.this, LocationActivity.class);
+        intent.putExtra("type", type);
+        intent.putExtra("color", color);
+        intent.putExtra("tag", tag);
+        intent.putExtra("imageId", imageId);
+        intent.putExtra("token", token);
+        intent.putExtra("isNew", isNew);
+        startActivityForResult(intent, requestCode);
+    }
+
+    private void startSearchActivity(int type, int color, String tag,int imageId, String token, boolean isNew, int requestCode){
+        Intent intent = new Intent(MapActivity.this, SearchActivity.class);
         intent.putExtra("type", type);
         intent.putExtra("color", color);
         intent.putExtra("tag", tag);

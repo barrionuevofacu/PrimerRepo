@@ -18,6 +18,8 @@ public class LocationDTO {
     private String coordinates ;
     @SerializedName("imageId")
     private int imageId;
+    @SerializedName("isSearch")
+    private boolean isSearch;
 
     public int getId() {
         return id;
