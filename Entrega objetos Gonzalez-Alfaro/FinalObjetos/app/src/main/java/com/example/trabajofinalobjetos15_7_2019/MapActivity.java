@@ -112,17 +112,22 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
         token = getIntent().getStringExtra("Token");
         if (!token.contains("bearer"))
             token = "bearer " + token;
-                    refreshList = new ArrayList<>();
-        stringListArea = getIntent().getStringArrayListExtra("imgs");
 
-        if (stringListArea != null && stringListArea.size()>0){
-            for (String str : stringListArea) {
-                vieneDePuntosEnArea = true;
-                String [] listPoint = str.split(":");
-                String lat = listPoint[listPoint.length-1].split(",")[0];
-                String lng = listPoint[listPoint.length-1].split(",")[1];
-                LatLng nltlng = new LatLng(Double.parseDouble(lat),Double.parseDouble(lng));
-                refreshList.add(nltlng);
+        refreshList = new ArrayList<>();
+        stringListArea = getIntent().getStringArrayListExtra("imgs");
+        vieneDePuntosEnArea = getIntent().getBooleanExtra("vieneDePointsInArea",false);
+        if (vieneDePuntosEnArea){
+            if (stringListArea != null && stringListArea.size()>0){
+                for (String str : stringListArea) {
+                    String [] listPoint = str.split(":");
+                    String lat = listPoint[listPoint.length-1].split(",")[0];
+                    String lng = listPoint[listPoint.length-1].split(",")[1];
+                    LatLng nltlng = new LatLng(Double.parseDouble(lat),Double.parseDouble(lng));
+                    refreshList.add(nltlng);
+                }
+            }
+            else{
+                Toast.makeText(getApplicationContext(), "No se encontraron perros en el area seleccionada", Toast.LENGTH_SHORT).show();
             }
         }
         confirmButton.setVisibility(View.INVISIBLE);
@@ -594,49 +599,52 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         api = retrofit.create(Api_Interface.class);
-        Call<List<LocationDTO>> call;
+        Call<List<LocationDTO>> call = null;
         if (!vieneDePuntosEnArea) {
             call = api.getLocations(token);
         }
         else{
-            call = api.getLocationsById(stringListArea, token);
+            if(stringListArea != null)
+                call = api.getLocationsById(stringListArea, token);
         }
-        call.enqueue(new Callback<List<LocationDTO>>() {
-            @Override
-            public void onResponse(Call<List<LocationDTO>> call, Response<List<LocationDTO>> response) {
-                if (!response.isSuccessful()) {
-                    Toast.makeText(getApplicationContext(), "Error obtaining user locations", Toast.LENGTH_SHORT).show();
+        if (call != null){
+            call.enqueue(new Callback<List<LocationDTO>>() {
+                @Override
+                public void onResponse(Call<List<LocationDTO>> call, Response<List<LocationDTO>> response) {
+                    if (!response.isSuccessful()) {
+                        Toast.makeText(getApplicationContext(), "Error obtaining user locations", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    List<LocationDTO> locations = response.body();
+                    for (LocationDTO location : locations) {
+                        generateLocation(location);
+                    }
+                    switch (activeMethod) {
+                        case 0: {
+                            addLocation();
+                            break;
+                        }
+                        case 1: {
+                            addLine();
+                            break;
+                        }
+                        case 2: {
+                            addPolygon();
+                            break;
+                        }
+                        case 4:{
+                            getLocationsInArea();
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<LocationDTO>> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(), "Service failure", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                List<LocationDTO> locations = response.body();
-                for (LocationDTO location : locations) {
-                    generateLocation(location);
-                }
-                switch (activeMethod) {
-                    case 0: {
-                        addLocation();
-                        break;
-                    }
-                    case 1: {
-                        addLine();
-                        break;
-                    }
-                    case 2: {
-                        addPolygon();
-                        break;
-                    }
-                    case 4:{
-                        getLocationsInArea();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<LocationDTO>> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Service failure", Toast.LENGTH_SHORT).show();
-                return;
-            }
-        });
+            });
+        }
     }
 
     public void generateLocation(LocationDTO location) {

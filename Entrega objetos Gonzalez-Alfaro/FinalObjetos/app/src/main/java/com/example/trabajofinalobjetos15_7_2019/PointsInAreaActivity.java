@@ -45,16 +45,17 @@ public class PointsInAreaActivity extends AppCompatActivity {
 
                 List<LocationDTO> locations = response.body();
                 ArrayList<String> stringList = new ArrayList<>();
-                if (locations.size() == 0)
-                    stringList.add("No se encontraron perros en el area seleccionada");
-                else {
+                if (locations.size() > 0){
                     for (LocationDTO l : locations)
                         stringList.add(l.getData());
                 }
+                else
+                    stringList = null;
                 //LLAMO AL ACTIVITY DEL MAPA
                 Intent intent = new Intent(PointsInAreaActivity.this, MapActivity.class);
                 intent.putExtra("imgs", stringList);
                 intent.putExtra("Token", getIntent().getStringExtra("token"));
+                intent.putExtra("vieneDePointsInArea",true);
                 startActivityForResult(intent, 2);
                 //initRecyclerView(stringList);
             }
