@@ -44,7 +44,7 @@ namespace WebApiObjetos.Services
 
         public async Task<List<LocationDTO>> GetLocations(int userId)
         {
-            var locations = await locationRepo.FindBy(x => x.UserId.Equals(userId));
+            var locations = await locationRepo.FindBy(x => x.UserId.Equals(userId) && !x.IsSearch);
             List<LocationDTO> locationsDTO = new List<LocationDTO>();
             foreach (Location location in locations)
             {
@@ -188,7 +188,8 @@ namespace WebApiObjetos.Services
 
         public async Task<List<LocationDTO>> GetLocationsNoPropias(int userId)
         {
-            var locations = await locationRepo.FindBy(x => !x.UserId.Equals(userId));
+            var locations = await locationRepo.FindBy(x => !x.UserId.Equals(userId) && !x.IsSearch);
+
             List<LocationDTO> locationsDTO = new List<LocationDTO>();
             foreach (Location location in locations)
             {
