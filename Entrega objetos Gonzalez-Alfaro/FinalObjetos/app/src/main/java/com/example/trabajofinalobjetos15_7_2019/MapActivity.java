@@ -2,6 +2,7 @@ package com.example.trabajofinalobjetos15_7_2019;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 
@@ -552,7 +553,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
 
     public void addPolygon() {
         activeMethod = 2;
-        Toast.makeText(getApplicationContext(), "Please select vertexes for the area", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Seleccione los vértices del área", Toast.LENGTH_SHORT).show();
         setPolygonsClickable(false);
         setPolylinesClickable(false);
         confirmButton.setVisibility(View.VISIBLE);
@@ -569,7 +570,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                 if (pointsToAddList.size() > 2)
                     startLocationActivity(2, getResources().getColor(R.color.Map_Green), "New Tag", 0, token, true, 1);
                 else {
-                    Toast.makeText(getApplicationContext(), "Please select another point for the area", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Seleccione otro vértice del área", Toast.LENGTH_SHORT).show();
                 }
             }
         });
