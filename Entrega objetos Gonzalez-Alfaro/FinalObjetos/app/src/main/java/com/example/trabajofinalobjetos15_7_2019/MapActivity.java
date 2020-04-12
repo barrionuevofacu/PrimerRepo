@@ -832,44 +832,14 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                                 editButton.setVisibility(View.INVISIBLE);
                             }
                         });
-//
-//                        switch (response.body().getType()) {
-//                            case 0: {
-//                                marker.setTag(response.body().getTag());
-//                                locationsHash.put(marker, response.body());
-//                                break;
-//                            }
-//                            case 1: {
-//                                PolylineOptions polyOptions = new PolylineOptions().clickable(true);
-//                                for (Marker marker : pointsToAddList) {
-//                                    polyOptions.add(marker.getPosition());
-//                                }
-//                                polyline = mMap.addPolyline(polyOptions);
-//                                polyline.setColor(response.body().getColor());
-//                                polyline.setTag(response.body().getTag());
-//                                locationsHash.put(polyline, response.body());
-//                                polylineList.add(polyline);
-//                                break;
-//                            }
-//                            case 2: {
-//                                PolygonOptions polyOptions = new PolygonOptions().clickable(true);
-//                                for (Marker marker : pointsToAddList) {
-//                                    polyOptions.add(marker.getPosition());
-//                                }
-//                                polygon = mMap.addPolygon(polyOptions);
-//                                polygon.setTag(response.body().getTag());
-//                                polygon.setFillColor(response.body().getColor());
-//                                polygon.setStrokeColor(response.body().getColor());
-//                                locationsHash.put(polygon, response.body());
-//                                polygonList.add(polygon);
-//                                break;
-//                            }
-//                        }
+                        mMap.clear();
+                        for (LocationDTO location : response.body()){
+                            generateLocation(location);
+                        }
                         activeMethod = 3;
-//                        setPolygonsClickable(true);
-//                        setPolylinesClickable(true);
-//                        clearPointsList(pointsToAddList);
-//                        Toast.makeText(getApplicationContext(), "Location Saved Successfully", Toast.LENGTH_SHORT).show();
+                        setPolygonsClickable(true);
+                        setPolylinesClickable(true);
+                        clearPointsList(pointsToAddList);
                     }
 
                     @Override
