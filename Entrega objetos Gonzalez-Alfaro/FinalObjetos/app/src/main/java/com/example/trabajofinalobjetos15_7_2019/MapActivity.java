@@ -829,9 +829,12 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                             }
                         });
                         mMap.clear();
-                        for (LocationDTO location : response.body()){
+                        if (response.body().size() > 0)
+                            for (LocationDTO location : response.body()){
                             generateLocation(location);
-                        }
+                            }
+                        else
+                            Toast.makeText(getApplicationContext(), "No se encontraron perros en el area seleccionada", Toast.LENGTH_SHORT).show();
                         activeMethod = 3;
                         setPolygonsClickable(true);
                         setPolylinesClickable(true);
