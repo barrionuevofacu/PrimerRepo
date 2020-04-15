@@ -137,6 +137,8 @@ namespace WebApiObjetos.Services
             int razasAGuardar = 3;
             if (razas.Count < 3)
                 razasAGuardar = razas.Count;
+
+            Console.WriteLine(result1.Response);
             for (int i = 0; i < razasAGuardar; i++)
             {
                 var razaI = razas.ElementAt(i)._Class;
@@ -149,7 +151,6 @@ namespace WebApiObjetos.Services
                 else
                     image.raza3 = raza;
 
-                Console.WriteLine(result1.Response);
                 Console.WriteLine("Cargando raza: " + raza + ". Con una precision de: " + porcentaje);
             }
 
