@@ -159,7 +159,14 @@ namespace WebApiObjetos.Services
                 location.IsSearch = true;
                 await locationRepo.Add(location.ToEntity());
                 Image image = await imageRepo.GetById((int)location.ImageId);
-                List<Image> images = imageRepo.FindBy(x => x.raza1 == image.raza1).Result.ToList();
+                List<Image> images = imageRepo
+                                        .FindBy(x => 
+                                                    x.raza1 == image.raza1 || x.raza1 == image.raza2 || x.raza1 == image.raza3 ||
+                                                    x.raza2 == image.raza1 || x.raza2 == image.raza2 || x.raza2 == image.raza3 ||
+                                                    x.raza3 == image.raza1 || x.raza3 == image.raza2 || x.raza3 == image.raza3
+                                        )
+                                        .Result
+                                        .ToList();
                 List<LocationDTO> result = new List<LocationDTO>();
                 foreach (Image i in images)
                 {
