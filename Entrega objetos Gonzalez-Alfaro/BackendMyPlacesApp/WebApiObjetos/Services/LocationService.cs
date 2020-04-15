@@ -100,7 +100,7 @@ namespace WebApiObjetos.Services
             VisualRecognitionService visualRecognition = new VisualRecognitionService("2018-03-19", authenticator);
             visualRecognition.SetServiceUrl("https://gateway.watsonplatform.net/visual-recognition/api");
             DetailedResponse<ClassifiedImages> result1;
-            string path = @"/Users/lauta/TESIS/MyTest.jpeg";
+            string path = @"/tesistemp/MyTest.jpeg";
             if (File.Exists(path)){
                 File.Delete(path);
             }
@@ -133,13 +133,26 @@ namespace WebApiObjetos.Services
             var responseHeaders = result1.Headers;  //  The response headers
             var responseJson = result1.Result;    //  The raw response JSON
             var statusCode = result1.StatusCode;
-            var class1 = responseJson.Images.FirstOrDefault().Classifiers.FirstOrDefault().Classes.FirstOrDefault();
-            var raza1 = class1._Class;
-            var porcentaje = class1.Score;
-            var raza = raza1.Split(".")[1];
-            image.raza1 = raza;
+            List<ClassResult> razas = responseJson.Images.FirstOrDefault().Classifiers.FirstOrDefault().Classes;
+            int razasAGuardar = 3;
+            if (razas.Count < 3)
+                razasAGuardar = razas.Count;
+
             Console.WriteLine(result1.Response);
-            Console.WriteLine("La raza es: " + raza + ". Con una precision de: " + porcentaje);
+            for (int i = 0; i < razasAGuardar; i++)
+            {
+                var razaI = razas.ElementAt(i)._Class;
+                var porcentaje = razas.ElementAt(i).Score;
+                var raza = razaI.Split(".")[1];
+                if (i == 0)
+                    image.raza1 = raza;
+                else if (i == 1)
+                    image.raza2 = raza;
+                else
+                    image.raza3 = raza;
+
+                Console.WriteLine("Cargando raza: " + raza + ". Con una precision de: " + porcentaje);
+            }
 
             try
             {
