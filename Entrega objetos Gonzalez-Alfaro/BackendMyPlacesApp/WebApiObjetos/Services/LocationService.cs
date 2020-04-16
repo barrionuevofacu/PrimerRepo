@@ -203,18 +203,10 @@ namespace WebApiObjetos.Services
             }
         }
 
-
-        public async Task<List<LocationDTO>> Buscar(LocationDTO location)
+        public async Task<List<Image>> BuscarParecidos(Image image)
         {
-            try
-            {
-                if (location.ImageId == 0 || location.ImageId == null)
-                    return null;
-                location.IsSearch = true;
-                await locationRepo.Add(location.ToEntity());
-                Image image = await imageRepo.GetById((int)location.ImageId);
-                List<Image> images = imageRepo
-                                        .FindBy(x => 
+            return imageRepo
+                                        .FindBy(x =>
                                                     (x.raza1 != null && image.raza1 != null && x.raza1 == image.raza1) ||
                                                     (x.raza1 != null && image.raza2 != null && x.raza1 == image.raza2) ||
                                                     (x.raza1 != null && image.raza3 != null && x.raza1 == image.raza3) ||
@@ -227,6 +219,18 @@ namespace WebApiObjetos.Services
                                         )
                                         .Result
                                         .ToList();
+        }
+
+        public async Task<List<LocationDTO>> Buscar(LocationDTO location)
+        {
+            try
+            {
+                if (location.ImageId == 0 || location.ImageId == null)
+                    return null;
+                location.IsSearch = true;
+                await locationRepo.Add(location.ToEntity());
+                Image image = await imageRepo.GetById((int)location.ImageId);
+                List<Image> images = await BuscarParecidos(image);
                 List<LocationDTO> result = new List<LocationDTO>();
                 foreach (Image i in images)
                 {
