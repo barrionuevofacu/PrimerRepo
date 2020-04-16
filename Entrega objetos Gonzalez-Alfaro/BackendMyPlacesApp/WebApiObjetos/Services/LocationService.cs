@@ -174,9 +174,15 @@ namespace WebApiObjetos.Services
                 Image image = await imageRepo.GetById((int)location.ImageId);
                 List<Image> images = imageRepo
                                         .FindBy(x => 
-                                                    x.raza1 == image.raza1 || x.raza1 == image.raza2 || x.raza1 == image.raza3 ||
-                                                    x.raza2 == image.raza1 || x.raza2 == image.raza2 || x.raza2 == image.raza3 ||
-                                                    x.raza3 == image.raza1 || x.raza3 == image.raza2 || x.raza3 == image.raza3
+                                                    (x.raza1 != null && image.raza1 != null && x.raza1 == image.raza1) ||
+                                                    (x.raza1 != null && image.raza2 != null && x.raza1 == image.raza2) ||
+                                                    (x.raza1 != null && image.raza3 != null && x.raza1 == image.raza3) ||
+                                                    (x.raza2 != null && image.raza1 != null && x.raza2 == image.raza1) ||
+                                                    (x.raza2 != null && image.raza2 != null && x.raza2 == image.raza2) ||
+                                                    (x.raza2 != null && image.raza3 != null && x.raza2 == image.raza3) ||
+                                                    (x.raza3 != null && image.raza1 != null && x.raza3 == image.raza1) ||
+                                                    (x.raza3 != null && image.raza2 != null && x.raza3 == image.raza2) ||
+                                                    (x.raza3 != null && image.raza3 != null && x.raza3 == image.raza3)
                                         )
                                         .Result
                                         .ToList();
@@ -186,7 +192,7 @@ namespace WebApiObjetos.Services
                     if (i.Id != location.ImageId)
                     {
                         var loc = locationRepo.FindBy(x => x.ImageId == i.Id).Result.FirstOrDefault();
-                        if (loc != null && !loc.IsSearch)
+                        if (loc != null && !loc.IsSearch && getDistance(loc.toDto(), location) < 3000)
                             result.Add(loc.toDto());
                     }
                 }
@@ -196,6 +202,12 @@ namespace WebApiObjetos.Services
             {
                 return null;
             }
+        }
+        public double getDistance(LocationDTO loc1, LocationDTO loc2)
+        {
+            var coor1 = getPoints(loc1.Coordinates).First();
+            var coor2 = getPoints(loc2.Coordinates).First();
+            return coor1.GetDistanceTo(coor2);
         }
         public async Task<ImageDTO> GetImage(int imageId)
         {
