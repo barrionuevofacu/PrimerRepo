@@ -20,7 +20,7 @@ namespace WebApiObjetos.Services
     {
         private ILocationRepository locationRepo;
         private IImageRepository imageRepo;
-
+        private IUserRepository userRepo;
         public LocationService(ILocationRepository locationRepo, IImageRepository imageRepo)
         {
             this.locationRepo = locationRepo;
@@ -156,24 +156,57 @@ namespace WebApiObjetos.Services
 
             try
             {
-                return (await imageRepo.Add(image.ToEntity())).toDto();
+                ImageDTO imagen = (await imageRepo.Add(image.ToEntity())).toDto();
+                List<Image> images = await BuscarParecidos(imagen.ToEntity());
+                foreach (Image i in images)
+                {
+                    var loc = locationRepo.FindBy(x => x.ImageId == i.Id).Result.FirstOrDefault();
+                    if (loc != null && loc.IsSearch)
+                    {
+                        var user = userRepo.FindBy(x => x.Id == loc.UserId).Result.FirstOrDefault();
+                        if (user.Email != null && !user.Email.Equals(""))
+                            EnviarMailPerroParecido(user.Email);
+                    }
+                }
+                return imagen;
             }
             catch (Exception e)
             {
                 return null;
             }
         }
-        public async Task<List<LocationDTO>> Buscar(LocationDTO location)
+
+        public void EnviarMailPerroParecido(string email)
         {
+            System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
+            msg.To.Add(email);
+            msg.Subject = "Quizás vieron a tu perro";
+            msg.SubjectEncoding = System.Text.Encoding.UTF8;
+            msg.Body = "Un usuario subió una foto de un animal que se parece a tu perro. Vé a fijarte!";
+            msg.BodyEncoding = System.Text.Encoding.UTF8;
+            msg.From = new System.Net.Mail.MailAddress("tesisperrosperdidos@gmail.com");
+
+            //Cliente Mail
+            System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
+            cliente.Credentials = new System.Net.NetworkCredential("tesisperrosperdidos@gmail.com", "tesisperros");
+            cliente.EnableSsl = true;
+            cliente.Port = 587;
+            cliente.Host = "smtp.gmail.com";
             try
             {
-                if (location.ImageId == 0 || location.ImageId == null)
-                    return null;
-                location.IsSearch = true;
-                await locationRepo.Add(location.ToEntity());
-                Image image = await imageRepo.GetById((int)location.ImageId);
-                List<Image> images = imageRepo
-                                        .FindBy(x => 
+                cliente.Send(msg);
+                Console.WriteLine("Correo enviado con éxito");
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Error al enviar el mail");
+            }
+        }
+
+        public async Task<List<Image>> BuscarParecidos(Image image)
+        {
+            return imageRepo
+                                        .FindBy(x =>
                                                     (x.raza1 != null && image.raza1 != null && x.raza1 == image.raza1) ||
                                                     (x.raza1 != null && image.raza2 != null && x.raza1 == image.raza2) ||
                                                     (x.raza1 != null && image.raza3 != null && x.raza1 == image.raza3) ||
@@ -186,6 +219,18 @@ namespace WebApiObjetos.Services
                                         )
                                         .Result
                                         .ToList();
+        }
+
+        public async Task<List<LocationDTO>> Buscar(LocationDTO location)
+        {
+            try
+            {
+                if (location.ImageId == 0 || location.ImageId == null)
+                    return null;
+                location.IsSearch = true;
+                await locationRepo.Add(location.ToEntity());
+                Image image = await imageRepo.GetById((int)location.ImageId);
+                List<Image> images = await BuscarParecidos(image);
                 List<LocationDTO> result = new List<LocationDTO>();
                 foreach (Image i in images)
                 {
