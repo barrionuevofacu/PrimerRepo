@@ -24,6 +24,10 @@ namespace WebApiObjetos.Models.Entities
 
         public bool IsSearch { get; set; }
 
+        public bool IsFound { get; set; }
+
+        public DateTime InsertDate { get; set; }
+
         public LocationDTO toDto()
         {
             return new LocationDTO
@@ -35,7 +39,9 @@ namespace WebApiObjetos.Models.Entities
                 Tag = this.Tag,
                 Type = this.Type,
                 ImageId = this.ImageId,
-                IsSearch = this.IsSearch
+                IsSearch = this.IsSearch,
+                IsFound = this.IsFound,
+                InsertDate = this.InsertDate
             };
         }
 

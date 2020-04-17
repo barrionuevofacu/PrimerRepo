@@ -30,6 +30,12 @@ namespace WebApiObjetos.Domain
         [DataMember]
         public bool IsSearch { get; set; }
 
+        [DataMember]
+        public bool IsFound { get; set; }
+
+        [DataMember]
+        public DateTime InsertDate { get; set; }
+
         public Location ToEntity()
         {
             return new Location
@@ -41,7 +47,9 @@ namespace WebApiObjetos.Domain
                 Coordinates = this.Coordinates,
                 Type = this.Type,
                 ImageId = this.ImageId,
-                IsSearch = this.IsSearch
+                IsSearch = this.IsSearch,
+                IsFound = this.IsFound,
+                InsertDate = this.InsertDate
             };
 
         }

@@ -20,6 +20,10 @@ public class LocationDTO {
     private int imageId;
     @SerializedName("isSearch")
     private boolean isSearch;
+    @SerializedName("isFound")
+    private boolean isFound;
+    @SerializedName("insertDate")
+    private boolean insertDate;
 
     public int getId() {
         return id;
