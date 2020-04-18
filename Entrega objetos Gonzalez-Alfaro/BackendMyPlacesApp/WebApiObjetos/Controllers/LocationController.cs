@@ -31,7 +31,7 @@ namespace WebApiObjetos.Controllers
             var result = await locationsService.AddLocation(location);
 
             if (result != null)
-                return Created("Location Created Succesfully", result);
+                return Created("Ubicación de perro creada con éxito", result);
             else
                 return Conflict("Ha ocurrido un error guardando su ubicación");
         }

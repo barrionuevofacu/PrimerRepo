@@ -2,6 +2,8 @@ package com.example.trabajofinalobjetos15_7_2019.DTOs;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
+
 public class LocationDTO {
 
     @SerializedName("id")
@@ -23,7 +25,7 @@ public class LocationDTO {
     @SerializedName("isFound")
     private boolean isFound;
     @SerializedName("insertDate")
-    private boolean insertDate;
+    private Date insertDate;
 
     public int getId() {
         return id;
