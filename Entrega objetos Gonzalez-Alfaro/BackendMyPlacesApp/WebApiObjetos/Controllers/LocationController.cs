@@ -27,13 +27,15 @@ namespace WebApiObjetos.Controllers
         {
             var userId = Int32.Parse(User.Claims.FirstOrDefault(x => x.Type.Equals("UserId")).Value);
             location.UserId = userId;
-
+            location.InsertDate = DateTime.Today;
             var result = await locationsService.AddLocation(location);
 
             if (result != null)
-                return Created("Ubicación de perro creada con éxito", result);
+            {
+                return Created("Tu imagen fue registrada.", result);
+            }
             else
-                return Conflict("Ha ocurrido un error guardando su ubicación");
+                return Conflict("Ha ocurrido un error guardando su imagen");
         }
 
         [HttpPost]

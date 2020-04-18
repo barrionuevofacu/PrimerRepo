@@ -26,7 +26,7 @@ namespace WebApiObjetos.Models.Entities
 
         public bool IsFound { get; set; }
 
-        public DateTime InsertDate { get; set; }
+        public DateTime? InsertDate { get; set; }
 
         public LocationDTO toDto()
         {

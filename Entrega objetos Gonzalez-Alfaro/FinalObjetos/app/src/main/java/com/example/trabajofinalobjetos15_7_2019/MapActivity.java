@@ -209,7 +209,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                                     marker = clickedMarker;
                                     Intent intent = new Intent(MapActivity.this, LocationActivity.class);
                                     intent.putExtra("type", 0);
-                                    intent.putExtra("color", getResources().getColor(R.color.Map_Red));
+                                    intent.putExtra("color", getResources().getColor(R.color.Map_Green));
                                     intent.putExtra("tag", clickedMarker.getTag().toString());
                                     intent.putExtra("isNew", false);
                                     intent.putExtra("imageId", locationsHash.get(marker).getImageId());
@@ -436,8 +436,8 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                         @Override
                         public void onMapClick(LatLng latLng) { }
                     });
-                    polygon.setFillColor(getResources().getColor(R.color.Map_Red));
-                    polygon.setStrokeColor(getResources().getColor(R.color.Map_Red));
+                    polygon.setFillColor(getResources().getColor(R.color.Map_Green));
+                    polygon.setStrokeColor(getResources().getColor(R.color.Map_Green));
                     polygon.setClickable(false);
                     clearPointsList(pointsToAddList);
                     confirmButton.setText("Ver perros");

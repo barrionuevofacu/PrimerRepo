@@ -34,7 +34,7 @@ namespace WebApiObjetos.Domain
         public bool IsFound { get; set; }
 
         [DataMember]
-        public DateTime InsertDate { get; set; }
+        public DateTime? InsertDate { get; set; }
 
         public Location ToEntity()
         {
