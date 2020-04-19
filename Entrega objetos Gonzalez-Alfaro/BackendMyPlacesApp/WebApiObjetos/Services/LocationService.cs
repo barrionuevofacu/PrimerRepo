@@ -66,13 +66,15 @@ namespace WebApiObjetos.Services
             return result;
         }
 
-        public async Task<LocationDTO> AddLocation(LocationDTO location)
+        public async Task<LocationDTO> AddLocation(LocationDTO locationDTO)
         {
             try
             {
-                if (location.ImageId == 0)
-                    location.ImageId = null;
-                return (await locationRepo.Add(location.ToEntity())).toDto();
+                if (locationDTO.ImageId == 0)
+                    locationDTO.ImageId = null;
+                var location = locationDTO.ToEntity();
+                location.InsertDate = DateTime.Today;
+                return (await locationRepo.Add(location)).toDto();
             }
             catch (Exception e)
             {
@@ -228,7 +230,7 @@ namespace WebApiObjetos.Services
                 if (location.ImageId == 0 || location.ImageId == null)
                     return null;
                 location.IsSearch = true;
-                await locationRepo.Add(location.ToEntity());
+                await AddLocation(location);
                 Image image = await imageRepo.GetById((int)location.ImageId);
                 List<Image> images = await BuscarParecidos(image);
                 List<LocationDTO> result = new List<LocationDTO>();

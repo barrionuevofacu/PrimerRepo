@@ -37,7 +37,9 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -178,11 +180,18 @@ public class LocationActivity extends AppCompatActivity implements AdapterView.O
             public void onClick(View v) {
                 saveLocationButton.setEnabled(false);
                 if (!currentPhotoPath.isEmpty()) {
-                    Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl(getResources().getString(R.string.base_Url))
-                            .addConverterFactory(GsonConverterFactory.create())
+                    OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                            .connectTimeout(1, TimeUnit.MINUTES)
+                            .readTimeout(1, TimeUnit.MINUTES)
+                            .writeTimeout(1, TimeUnit.MINUTES)
                             .build();
-                    api = retrofit.create(Api_Interface.class);
+                    Retrofit.Builder builder = new Retrofit.Builder()
+                            .baseUrl(getResources().getString(R.string.base_Url))
+                            .client(okHttpClient)
+                            .addConverterFactory(GsonConverterFactory.create());
+                    Retrofit retrofit = builder
+                            .build();
+					api = retrofit.create(Api_Interface.class);
                     ImageDTO imageToSend = new ImageDTO();
                     Bitmap imageBitmap = BitmapFactory.decodeFile(currentPhotoPath);
                     byte[] byteArray = getBytesFromBitmap(imageBitmap, 50);

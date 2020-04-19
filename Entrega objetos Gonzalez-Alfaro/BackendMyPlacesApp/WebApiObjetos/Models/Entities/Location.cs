@@ -41,7 +41,7 @@ namespace WebApiObjetos.Models.Entities
                 ImageId = this.ImageId,
                 IsSearch = this.IsSearch,
                 IsFound = this.IsFound,
-                InsertDate = this.InsertDate
+                InsertDate = this.InsertDate.ToString()
             };
         }
 

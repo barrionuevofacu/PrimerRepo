@@ -34,7 +34,7 @@ namespace WebApiObjetos.Domain
         public bool IsFound { get; set; }
 
         [DataMember]
-        public DateTime? InsertDate { get; set; }
+        public string InsertDate { get; set; }
 
         public Location ToEntity()
         {
@@ -49,7 +49,7 @@ namespace WebApiObjetos.Domain
                 ImageId = this.ImageId,
                 IsSearch = this.IsSearch,
                 IsFound = this.IsFound,
-                InsertDate = this.InsertDate
+                InsertDate = Convert.ToDateTime(this.InsertDate)
             };
 
         }

@@ -27,7 +27,6 @@ namespace WebApiObjetos.Controllers
         {
             var userId = Int32.Parse(User.Claims.FirstOrDefault(x => x.Type.Equals("UserId")).Value);
             location.UserId = userId;
-            location.InsertDate = DateTime.Today;
             var result = await locationsService.AddLocation(location);
 
             if (result != null)

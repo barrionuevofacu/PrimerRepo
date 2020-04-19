@@ -25,7 +25,7 @@ public class LocationDTO {
     @SerializedName("isFound")
     private boolean isFound;
     @SerializedName("insertDate")
-    private Date insertDate;
+    private String insertDate;
 
     public int getId() {
         return id;
