@@ -27,6 +27,30 @@ public class LocationDTO {
     @SerializedName("insertDate")
     private String insertDate;
 
+    public boolean isSearch() {
+        return isSearch;
+    }
+
+    public void setSearch(boolean search) {
+        isSearch = search;
+    }
+
+    public boolean isFound() {
+        return isFound;
+    }
+
+    public void setFound(boolean found) {
+        isFound = found;
+    }
+
+    public String getInsertDate() {
+        return insertDate;
+    }
+
+    public void setInsertDate(String insertDate) {
+        this.insertDate = insertDate;
+    }
+
     public int getId() {
         return id;
     }

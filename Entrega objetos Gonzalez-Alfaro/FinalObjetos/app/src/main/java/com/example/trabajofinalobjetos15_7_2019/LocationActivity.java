@@ -57,6 +57,7 @@ public class LocationActivity extends AppCompatActivity implements AdapterView.O
     private ImageView camButton;
     private int colorSelection;
     private TextView tagTextView;
+    private TextView fechaTextView;
     private String currentPhotoPath;
     private int imageId;
     private String token;
@@ -69,6 +70,8 @@ public class LocationActivity extends AppCompatActivity implements AdapterView.O
         imageView = findViewById(R.id.imageView);
         camButton = findViewById(R.id.imageViewCam);
         tagTextView = findViewById(R.id.tagTextView);
+        fechaTextView = findViewById(R.id.fechaTextView);
+        fechaTextView.setEnabled(false);
         Button deleteLocationButton = findViewById(R.id.DeleteButton);
         final Button saveLocationButton = findViewById(R.id.SaveButton);
         soloVista = getIntent().getBooleanExtra("soloVista",false);
@@ -77,6 +80,17 @@ public class LocationActivity extends AppCompatActivity implements AdapterView.O
         imageId = getIntent().getIntExtra("imageId", 0);
         token = getIntent().getStringExtra("token");
         tagTextView.setText(getIntent().getStringExtra("tag"));
+        String fechaCompleta = getIntent().getStringExtra("fecha");
+        if (fechaCompleta != null){
+            String fecha = fechaCompleta.split(" ")[0];
+            String hora = fechaCompleta.split(" ")[1];
+            fecha = "Publicado el "+fecha+" a las "+hora.split(":")[0]+":"+hora.split(":")[1];
+            fechaTextView.setText(fecha);
+            fechaTextView.setVisibility(View.VISIBLE);
+        }
+        else{
+            fechaTextView.setVisibility(View.INVISIBLE);
+        }
         if (soloVista){
             tagTextView.setEnabled(false);
             deleteLocationButton.setVisibility(View.INVISIBLE);
