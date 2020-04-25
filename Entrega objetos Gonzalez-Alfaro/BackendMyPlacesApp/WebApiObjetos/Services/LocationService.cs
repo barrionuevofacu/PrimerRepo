@@ -44,7 +44,7 @@ namespace WebApiObjetos.Services
 
         public async Task<List<LocationDTO>> GetLocations(int userId)
         {
-            var locations = await locationRepo.FindBy(x => x.UserId.Equals(userId) && !x.IsSearch);
+            var locations = await locationRepo.FindBy(x => x.UserId.Equals(userId));
             List<LocationDTO> locationsDTO = new List<LocationDTO>();
             foreach (Location location in locations)
             {

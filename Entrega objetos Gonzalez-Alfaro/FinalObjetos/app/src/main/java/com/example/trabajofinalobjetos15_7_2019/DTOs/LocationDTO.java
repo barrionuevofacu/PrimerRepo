@@ -83,7 +83,9 @@ public class LocationDTO {
         this.imageId = imageId;
     }
 
+    public boolean getIsSearch() { return isSearch;}
 
+    public void setIsSearch(boolean isSearch) { this.isSearch = isSearch;}
 
     public LocationDTO(String coordinates) {
         this.coordinates = coordinates;
