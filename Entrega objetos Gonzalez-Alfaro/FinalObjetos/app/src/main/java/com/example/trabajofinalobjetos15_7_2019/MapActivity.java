@@ -212,6 +212,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                                     intent.putExtra("type", 0);
                                     intent.putExtra("color", getResources().getColor(R.color.Map_Green));
                                     intent.putExtra("tag", clickedMarker.getTag().toString());
+                                    intent.putExtra("fecha",locationsHash.get(marker).getInsertDate());
                                     intent.putExtra("isNew", false);
                                     intent.putExtra("imageId", locationsHash.get(marker).getImageId());
                                     intent.putExtra("token", token);
@@ -230,6 +231,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                                     intent.putExtra("type", 0);
                                     intent.putExtra("color", getResources().getColor(R.color.Map_Red));
                                     intent.putExtra("tag", clickedMarker.getTag().toString());
+                                    intent.putExtra("fecha",locationsHash.get(marker).getInsertDate());
                                     intent.putExtra("isNew", false);
                                     intent.putExtra("imageId", locationsHash.get(marker).getImageId());
                                     intent.putExtra("token", token);
