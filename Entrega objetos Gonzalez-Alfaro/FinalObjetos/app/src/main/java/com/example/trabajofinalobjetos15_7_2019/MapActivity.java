@@ -689,7 +689,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                 Marker markerToAdd;
                 markerToAdd = mMap.addMarker(new MarkerOptions().position(getPoints(location.getCoordinates()).get(0)).title("Marker Title"));
                 markerToAdd.setTag(location.getTag());
-                if (location.getIsSearch())
+                if (location.isSearch())
                     markerToAdd.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                 locationsHash.put(markerToAdd, location);
                 break;
