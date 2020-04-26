@@ -74,6 +74,21 @@ namespace WebApiObjetos.Services
                     locationDTO.ImageId = null;
                 var location = locationDTO.ToEntity();
                 location.InsertDate = DateTime.Today;
+                if (!locationDTO.IsSearch)
+                {
+                    var imagen = imageRepo.FindBy(x => x.Id == location.ImageId).Result.FirstOrDefault();
+                    List<Image> images = await BuscarParecidos(imagen);
+                    foreach (Image i in images)
+                    {
+                        var loc = locationRepo.FindBy(x => x.ImageId == i.Id).Result.FirstOrDefault();
+                        if (loc != null && loc.IsSearch)
+                        {
+                            var user = userRepo.FindBy(x => x.Id == loc.UserId).Result.FirstOrDefault();
+                            if (user.Email != null && !user.Email.Equals(""))
+                                EnviarMailPerroParecido(user.Email);
+                        }
+                    }
+                }
                 return (await locationRepo.Add(location)).toDto();
             }
             catch (Exception e)
@@ -159,17 +174,6 @@ namespace WebApiObjetos.Services
             try
             {
                 ImageDTO imagen = (await imageRepo.Add(image.ToEntity())).toDto();
-                List<Image> images = await BuscarParecidos(imagen.ToEntity());
-                foreach (Image i in images)
-                {
-                    var loc = locationRepo.FindBy(x => x.ImageId == i.Id).Result.FirstOrDefault();
-                    if (loc != null && loc.IsSearch)
-                    {
-                        var user = userRepo.FindBy(x => x.Id == loc.UserId).Result.FirstOrDefault();
-                        if (user.Email != null && !user.Email.Equals(""))
-                            EnviarMailPerroParecido(user.Email);
-                    }
-                }
                 return imagen;
             }
             catch (Exception e)
