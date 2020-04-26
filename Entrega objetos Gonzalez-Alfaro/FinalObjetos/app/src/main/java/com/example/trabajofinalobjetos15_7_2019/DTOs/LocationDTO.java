@@ -107,8 +107,6 @@ public class LocationDTO {
         this.imageId = imageId;
     }
 
-
-
     public LocationDTO(String coordinates) {
         this.coordinates = coordinates;
     }

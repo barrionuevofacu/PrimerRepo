@@ -36,7 +36,9 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -160,8 +162,14 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
             public void onClick(View v) {
 
                 if (!currentPhotoPath.isEmpty()) {
+                    OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                            .connectTimeout(1, TimeUnit.MINUTES)
+                            .readTimeout(1, TimeUnit.MINUTES)
+                            .writeTimeout(1, TimeUnit.MINUTES)
+                            .build();
                     Retrofit retrofit = new Retrofit.Builder()
                             .baseUrl(getResources().getString(R.string.base_Url))
+                            .client(okHttpClient)
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
                     api = retrofit.create(Api_Interface.class);

@@ -23,6 +23,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -688,6 +689,8 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                 Marker markerToAdd;
                 markerToAdd = mMap.addMarker(new MarkerOptions().position(getPoints(location.getCoordinates()).get(0)).title("Marker Title"));
                 markerToAdd.setTag(location.getTag());
+                if (location.isSearch())
+                    markerToAdd.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                 locationsHash.put(markerToAdd, location);
                 break;
             }
