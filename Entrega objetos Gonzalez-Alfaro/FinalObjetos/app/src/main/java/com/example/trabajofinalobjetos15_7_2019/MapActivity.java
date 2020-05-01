@@ -814,6 +814,8 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                     }
                 });
             } else if (requestCode == 11) {
+                vieneDePuntosEnArea = true;
+                trajoUbicaciones = true;
                 for (Marker marker : pointsToAddList) {
                     locationToAdd.setCoordinates(locationToAdd.getCoordinates() + extractLocationString(marker.getPosition()));
                 }
