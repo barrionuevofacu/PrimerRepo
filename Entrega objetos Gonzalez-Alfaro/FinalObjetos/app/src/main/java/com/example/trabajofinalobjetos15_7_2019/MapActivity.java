@@ -98,6 +98,8 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
     private ImageView gpsWidget;
     private Boolean vieneDePuntosEnArea = false;
     private Boolean trajoUbicaciones = true;
+    private long backPressedTime = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -166,7 +168,6 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
-
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -374,8 +375,13 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
             drawer.closeDrawer(GravityCompat.START);
         } else {
             if (activeMethod == 4){
-                polygon.remove();
-                confirmButton.setText("Confirm");
+                if (backPressedTime + 2000 > System.currentTimeMillis()) {
+                    polygon.remove();
+                    confirmButton.setText("Confirmar");
+                } else {
+                    Toast.makeText(getBaseContext(), "Presione atrás de nuevo para salir", Toast.LENGTH_SHORT).show();
+                }
+                backPressedTime = System.currentTimeMillis();
             }
             if (confirmButton.getVisibility() == View.VISIBLE) {
                 setPolygonsClickable(true);
@@ -391,7 +397,16 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                     }
                 });
             }
-            else super.onBackPressed();
+            else {
+                if (backPressedTime + 2000 > System.currentTimeMillis()) {
+                    finishAffinity();
+                    System.exit(0);
+                } else {
+                    Toast.makeText(getBaseContext(), "Presione atrás de nuevo para salir", Toast.LENGTH_SHORT).show();
+                }
+                //super.onBackPressed();
+                backPressedTime = System.currentTimeMillis();
+            }
         }
     }
 
