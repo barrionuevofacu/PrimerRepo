@@ -16,6 +16,10 @@
             android:id="@+id/search"
             android:icon="@drawable/id_getlocations"
             android:title="@string/get_mi_perro"/>
+        <item
+            android:id="@+id/myLocations"
+            android:icon="@drawable/id_getlocations"
+            android:title="@string/mis_publicaciones"/>
 
     </group>
 

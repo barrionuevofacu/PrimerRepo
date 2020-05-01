@@ -423,6 +423,8 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
             getLocationsInArea();
         } else if (id == R.id.search){
             search();
+        } else if (id == R.id.myLocations){
+            drawFigures();
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

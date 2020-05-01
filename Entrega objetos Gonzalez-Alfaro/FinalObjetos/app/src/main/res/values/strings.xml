@@ -13,6 +13,7 @@
     <string name="AddLocation">Encontré un perro</string>
     <string name="get_locations">Perros en la zona</string>
     <string name="get_mi_perro">Busco mi perro</string>
+    <string name="mis_publicaciones">Ver mis publicaciones</string>
     <string-array name="planets_array">
         <item>Green</item>
         <item>Blue</item>
