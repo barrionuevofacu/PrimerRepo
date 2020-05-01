@@ -24,14 +24,15 @@ public class LoginActivity extends AppCompatActivity {
     private TextView userNameTextView;
     private TextView passwordTextView;
     private Api_Interface api;
-
+    Button loginButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         userNameTextView = findViewById(R.id.tagTextView);
         passwordTextView = findViewById(R.id.passwordField);
-        Button loginButton = findViewById(R.id.SaveButton);
+        loginButton = findViewById(R.id.SaveButton);
+        loginButton.setEnabled(true);
         Button signInButton = findViewById(R.id.DeleteButton);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -41,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(getApplicationContext(), "Inserte usuario y contraseña", Toast.LENGTH_SHORT);
                     toast.show();
                 } else {
+                    loginButton.setEnabled(false);
                     UserDTO user = new UserDTO(userNameTextView.getText().toString(), passwordTextView.getText().toString(), "");
                     Retrofit retrofit = new Retrofit.Builder()
                             .baseUrl(getResources().getString(R.string.base_Url))
@@ -52,6 +54,7 @@ public class LoginActivity extends AppCompatActivity {
                     call.enqueue(new Callback<UserDTO>() {
                         @Override
                         public void onResponse(Call<UserDTO> call, Response<UserDTO> response) {
+                            loginButton.setEnabled(true);
                             if (!response.isSuccessful()) {
                                 Toast toast = Toast.makeText(getApplicationContext(), "Contraseña inválida", Toast.LENGTH_SHORT);
                                 toast.show();
@@ -68,6 +71,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<UserDTO> call, Throwable t) {
+                            loginButton.setEnabled(true);
                             Toast toast = Toast.makeText(getApplicationContext(), "Falla de servicio", Toast.LENGTH_SHORT);
                             toast.show();
                             return;

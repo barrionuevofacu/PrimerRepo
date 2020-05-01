@@ -21,7 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class SignInActivity extends AppCompatActivity {
 
     private Api_Interface api;
-
+    Button signInButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +29,7 @@ public class SignInActivity extends AppCompatActivity {
         final TextView userName = findViewById(R.id.usernameTextview);
         final TextView password = findViewById(R.id.passwordTextview);
         final TextView email = findViewById(R.id.emailTextView);
-        Button signInButton = findViewById(R.id.DeleteButton);
+        signInButton = findViewById(R.id.DeleteButton);
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +38,7 @@ public class SignInActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(getApplicationContext(), "Complete todos los campos por favor", Toast.LENGTH_SHORT);
                     toast.show();
                 } else {
+                    signInButton.setEnabled(false);
                     UserDTO user = new UserDTO(userName.getText().toString(), password.getText().toString(), email.getText().toString());
                     Retrofit retrofit = new Retrofit.Builder()
                             .baseUrl(getResources().getString(R.string.base_Url))
@@ -48,6 +49,7 @@ public class SignInActivity extends AppCompatActivity {
                     call.enqueue(new Callback<UserDTO>() {
                         @Override
                         public void onResponse(Call<UserDTO> call, Response<UserDTO> response) {
+                            signInButton.setEnabled(true);
                             if (!response.isSuccessful()) {
                                 Toast toast = Toast.makeText(getApplicationContext(), "Please choose another Username", Toast.LENGTH_SHORT);
                                 toast.show();
@@ -63,6 +65,7 @@ public class SignInActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<UserDTO> call, Throwable t) {
+                            signInButton.setEnabled(true);
                             Toast toast = Toast.makeText(getApplicationContext(), "Service failure", Toast.LENGTH_SHORT);
                             toast.show();
                             return;
