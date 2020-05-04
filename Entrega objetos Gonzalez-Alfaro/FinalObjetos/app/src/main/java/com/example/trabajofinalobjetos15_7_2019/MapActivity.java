@@ -424,6 +424,8 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
         } else if (id == R.id.search){
             search();
         } else if (id == R.id.myLocations){
+            vieneDePuntosEnArea = false;
+            mMap.clear();
             drawFigures();
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -533,6 +535,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                     pointsToAddList.remove(0);
                 }
                 marker = mMap.addMarker(new MarkerOptions().position(latLng).title("Marker Title"));
+                marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                 pointsToAddList.add(marker);
             }
         });

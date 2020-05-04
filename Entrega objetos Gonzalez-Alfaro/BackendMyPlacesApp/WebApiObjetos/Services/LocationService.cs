@@ -243,7 +243,7 @@ namespace WebApiObjetos.Services
                     if (i.Id != location.ImageId)
                     {
                         var loc = locationRepo.FindBy(x => x.ImageId == i.Id).Result.FirstOrDefault();
-                        if (loc != null && !loc.IsSearch && getDistance(loc.toDto(), location) < 3000)
+                        if (loc != null && !loc.IsSearch && loc.UserId != location.UserId && getDistance(loc.toDto(), location) < 3000)
                             result.Add(loc.toDto());
                     }
                 }
