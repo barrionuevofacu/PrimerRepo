@@ -85,7 +85,7 @@ namespace WebApiObjetos.Services
                         {
                             var user = userRepo.FindBy(x => x.Id == loc.UserId).Result.FirstOrDefault();
                             if (user.Email != null && !user.Email.Equals(""))
-                                EnviarMailPerroParecido(user.Email);
+                                EnviarMail(user.Email, "Quizás vieron a tu perro", "Un usuario subió una foto de un animal que se parece a tu perro. Vé a fijarte!");
                         }
                     }
                 }
@@ -182,13 +182,18 @@ namespace WebApiObjetos.Services
             }
         }
 
-        public void EnviarMailPerroParecido(string email)
+        public void contactarInformador(string usuario, string mensaje)
+        {
+
+        }
+
+        public void EnviarMail(string destinatario, string asunto, string mensaje)
         {
             System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
-            msg.To.Add(email);
-            msg.Subject = "Quizás vieron a tu perro";
+            msg.To.Add(destinatario);
+            msg.Subject = asunto;
             msg.SubjectEncoding = System.Text.Encoding.UTF8;
-            msg.Body = "Un usuario subió una foto de un animal que se parece a tu perro. Vé a fijarte!";
+            msg.Body = mensaje;
             msg.BodyEncoding = System.Text.Encoding.UTF8;
             msg.From = new System.Net.Mail.MailAddress("tesisperrosperdidos@gmail.com");
 
