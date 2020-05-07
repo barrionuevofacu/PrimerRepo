@@ -29,17 +29,18 @@ public class SignInActivity extends AppCompatActivity {
         final TextView userName = findViewById(R.id.usernameTextview);
         final TextView password = findViewById(R.id.passwordTextview);
         final TextView email = findViewById(R.id.emailTextView);
+        final TextView telefono = findViewById(R.id.telefonoTextView);
         signInButton = findViewById(R.id.DeleteButton);
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (TextUtils.isEmpty(userName.getText()) || TextUtils.isEmpty(password.getText()) || TextUtils.isEmpty(email.getText())) {
+                if (TextUtils.isEmpty(userName.getText()) || TextUtils.isEmpty(password.getText()) || TextUtils.isEmpty(email.getText()) || TextUtils.isEmpty(telefono.getText())) {
                     Toast toast = Toast.makeText(getApplicationContext(), "Complete todos los campos por favor", Toast.LENGTH_SHORT);
                     toast.show();
                 } else {
                     signInButton.setEnabled(false);
-                    UserDTO user = new UserDTO(userName.getText().toString(), password.getText().toString(), email.getText().toString());
+                    UserDTO user = new UserDTO(userName.getText().toString(), password.getText().toString(), email.getText().toString(), telefono.getText().toString());
                     Retrofit retrofit = new Retrofit.Builder()
                             .baseUrl(getResources().getString(R.string.base_Url))
                             .addConverterFactory(GsonConverterFactory.create())
@@ -51,7 +52,7 @@ public class SignInActivity extends AppCompatActivity {
                         public void onResponse(Call<UserDTO> call, Response<UserDTO> response) {
                             signInButton.setEnabled(true);
                             if (!response.isSuccessful()) {
-                                Toast toast = Toast.makeText(getApplicationContext(), "Please choose another Username", Toast.LENGTH_SHORT);
+                                Toast toast = Toast.makeText(getApplicationContext(), "Ingrese otro Username", Toast.LENGTH_SHORT);
                                 toast.show();
                                 return;
                             }

@@ -26,6 +26,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -73,6 +74,8 @@ public class LocationActivity extends AppCompatActivity implements AdapterView.O
         fechaTextView = findViewById(R.id.fechaTextView);
         fechaTextView.setEnabled(false);
         Button deleteLocationButton = findViewById(R.id.DeleteButton);
+        Button contactButton = findViewById(R.id.contactButton);
+        LinearLayout botones = findViewById(R.id.layoutBotones);
         final Button saveLocationButton = findViewById(R.id.SaveButton);
         soloVista = getIntent().getBooleanExtra("soloVista",false);
         boolean isNew = getIntent().getBooleanExtra("isNew", true);
@@ -96,6 +99,10 @@ public class LocationActivity extends AppCompatActivity implements AdapterView.O
             deleteLocationButton.setVisibility(View.INVISIBLE);
             saveLocationButton.setVisibility(View.INVISIBLE);
             camButton.setVisibility(View.INVISIBLE);
+            contactButton.setVisibility(View.VISIBLE);
+        }
+        else{
+            contactButton.setVisibility(View.INVISIBLE);
         }
         currentPhotoPath = "";
 
@@ -250,6 +257,45 @@ public class LocationActivity extends AppCompatActivity implements AdapterView.O
             }
 
         });
+
+        contactButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                        .connectTimeout(1, TimeUnit.MINUTES)
+                        .readTimeout(1, TimeUnit.MINUTES)
+                        .writeTimeout(1, TimeUnit.MINUTES)
+                        .build();
+                Retrofit.Builder builder = new Retrofit.Builder()
+                        .baseUrl(getResources().getString(R.string.base_Url))
+                        .client(okHttpClient)
+                        .addConverterFactory(GsonConverterFactory.create());
+                Retrofit retrofit = builder
+                        .build();
+                api = retrofit.create(Api_Interface.class);
+                Call<String> call = api.contactInformador(imageId, token);
+                call.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        if (!response.isSuccessful()) {
+                            Toast toast = Toast.makeText(getApplicationContext(), "Unable to save Image", Toast.LENGTH_SHORT);
+                            toast.show();
+                            return;
+                        }
+                        Toast toast = Toast.makeText(getApplicationContext(), "Unable to save Image", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                        Toast toast = Toast.makeText(getApplicationContext(), "Service failure", Toast.LENGTH_SHORT);
+                        toast.show();
+                        saveLocationButton.setEnabled(true);
+                    }
+                });
+            }
+        });
+
         if (isNew)
             deleteLocationButton.setVisibility(View.INVISIBLE);
         if ((getIntent().getIntExtra("type", 0)) == 0)

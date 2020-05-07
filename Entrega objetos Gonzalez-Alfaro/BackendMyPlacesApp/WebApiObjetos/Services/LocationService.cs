@@ -21,10 +21,11 @@ namespace WebApiObjetos.Services
         private ILocationRepository locationRepo;
         private IImageRepository imageRepo;
         private IUserRepository userRepo;
-        public LocationService(ILocationRepository locationRepo, IImageRepository imageRepo)
+        public LocationService(ILocationRepository locationRepo, IImageRepository imageRepo, IUserRepository userRepo)
         {
             this.locationRepo = locationRepo;
             this.imageRepo = imageRepo;
+            this.userRepo = userRepo;
         }
 
 
@@ -180,11 +181,6 @@ namespace WebApiObjetos.Services
             {
                 return null;
             }
-        }
-
-        public void contactarInformador(string usuario, string mensaje)
-        {
-
         }
 
         public void EnviarMail(string destinatario, string asunto, string mensaje)
@@ -389,6 +385,26 @@ namespace WebApiObjetos.Services
                 }
             }
             return coordinatesList;
+        }
+
+        public async Task<bool> ContactInformador(int userId, int imageId)
+        {
+            try
+            {
+                var buscador = userRepo.FindBy(x => x.Id.Equals(userId)).Result.FirstOrDefault();
+                var informadorId = imageRepo.FindBy(x => x.Id == imageId).Result.FirstOrDefault().UserId;
+                var informador = userRepo.FindBy(x => x.Id == informadorId).Result.FirstOrDefault();
+                var mensaje = "Un usuario vió tu publicación y desea comunicarse con vos! " +
+                    "Contactalo mediante telefono al: " + buscador.Telefono + " o a su correo: " + buscador.Email + " . \n" +
+                    "Muchas gracias!";
+                EnviarMail(informador.Email, "Un usuario desea contactarte", mensaje);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
         }
     }
 }

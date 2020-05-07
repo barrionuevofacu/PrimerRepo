@@ -140,5 +140,19 @@ namespace WebApiObjetos.Controllers
             return Ok(result);
         }
 
+        [HttpGet]
+        [Route("ContactInformador/{imageId}")]
+        public async Task<IActionResult> ContactInformador(int imageId)
+        {
+            var userId = Int32.Parse(User.Claims.FirstOrDefault(x => x.Type.Equals("UserId")).Value);
+            var result = await locationsService.ContactInformador(userId, imageId);
+            try { 
+                return Ok("Correo enviado exitosamente");
+            }
+            catch(Exception e)
+            {
+                return Conflict("Ha ocurrido un error al enviar mail.");
+            }
+        }
     }
 }

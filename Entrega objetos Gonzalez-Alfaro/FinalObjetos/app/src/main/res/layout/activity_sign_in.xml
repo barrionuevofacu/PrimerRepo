@@ -71,6 +71,14 @@
                     android:hint="Email"
                     android:inputType="textEmailAddress" />
 
+                <EditText
+                    android:id="@+id/telefonoTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Telefono"
+                    android:inputType="textEmailAddress" />
+
                 <Button
                     android:id="@+id/DeleteButton"
                     android:layout_width="match_parent"

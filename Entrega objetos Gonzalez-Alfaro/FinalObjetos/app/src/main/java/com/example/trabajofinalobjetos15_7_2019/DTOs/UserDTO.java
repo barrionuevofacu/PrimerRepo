@@ -10,6 +10,8 @@ public class UserDTO {
     private String Password;
     @SerializedName("email")
     private String Email;
+    @SerializedName("telefono")
+    private String Telefono;
     @SerializedName("token")
     private String Token;
 
@@ -37,6 +39,14 @@ public class UserDTO {
         Email = email;
     }
 
+    public String getTelefono() {
+        return Telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        Telefono = telefono;
+    }
+
     public String getToken() {
         return Token;
     }
@@ -46,10 +56,11 @@ public class UserDTO {
     }
 
 
-    public UserDTO(String UserName, String Password , String Email) {
+    public UserDTO(String UserName, String Password , String Email, String Telefono) {
         this.UserName = UserName;
         this.Password = Password;
         this.Email = Email;
+        this.Telefono = Telefono;
     }
 
 

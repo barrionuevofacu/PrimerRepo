@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
                     toast.show();
                 } else {
                     loginButton.setEnabled(false);
-                    UserDTO user = new UserDTO(userNameTextView.getText().toString(), passwordTextView.getText().toString(), "");
+                    UserDTO user = new UserDTO(userNameTextView.getText().toString(), passwordTextView.getText().toString(), "", "");
                     Retrofit retrofit = new Retrofit.Builder()
                             .baseUrl(getResources().getString(R.string.base_Url))
                             .addConverterFactory(GsonConverterFactory.create())

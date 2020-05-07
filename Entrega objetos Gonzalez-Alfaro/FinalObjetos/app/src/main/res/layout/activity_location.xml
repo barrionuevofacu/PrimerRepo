@@ -73,6 +73,7 @@
             android:inputType="textPersonName" />
 
         <LinearLayout
+            android:id="@+id/layoutBotones"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="5dp"
@@ -81,12 +82,12 @@
             <Button
                 android:id="@+id/DeleteButton"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
                 android:layout_marginTop="3dp"
+                android:layout_marginRight="2dp"
                 android:layout_marginBottom="3dp"
+                android:layout_weight="1"
                 android:background="@color/colorPrimary"
                 android:text="Eliminar"
                 android:textColor="#FFFFFF" />
@@ -94,14 +95,27 @@
             <Button
                 android:id="@+id/SaveButton"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
                 android:layout_marginTop="3dp"
+                android:layout_marginRight="2dp"
                 android:layout_marginBottom="3dp"
+                android:layout_weight="1"
                 android:background="@color/colorPrimary"
                 android:text="Guardar"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/contactButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginBottom="3dp"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:text="Contactar"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
 

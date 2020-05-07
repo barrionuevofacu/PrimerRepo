@@ -17,6 +17,8 @@ namespace WebApiObjetos.Models.Entities
 
         public string Email { get; set; }
 
+        public string Telefono { get; set; }
+
         public UserDTO toDto()
         {
             return new UserDTO
@@ -24,6 +26,7 @@ namespace WebApiObjetos.Models.Entities
                 UserName = this.UserName,
                 Password = this.Password,
                 Email = this.Email,
+                Telefono = this.Telefono,
             };
         }
     }

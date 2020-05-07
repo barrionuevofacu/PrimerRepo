@@ -24,6 +24,9 @@ namespace WebApiObjetos.Domain
         public string Email { get; set; }
 
         [DataMember()]
+        public string Telefono { get; set; }
+
+        [DataMember()]
         public string Token { get; set; }
         
         public User ToEntity()
@@ -33,6 +36,7 @@ namespace WebApiObjetos.Domain
                 UserName = this.UserName,
                 Password = this.Password,
                 Email = this.Email,
+                Telefono = this.Telefono,
             };
         }
     }

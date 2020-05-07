@@ -28,6 +28,9 @@ public interface Api_Interface {
     @POST("/api/Location/LocationsInArea")
     Call<List<LocationDTO>> getLocationsInArea(@Body LocationDTO location, @Header("Authorization") String token);
 
+    @GET("/api/Location/ContactInformador/{imageId}")
+    Call<String> contactInformador(@Path("imageId") int imageId, @Header("Authorization") String token);
+
     @GET("api/Location/")
     Call<List<LocationDTO>> getLocations(@Header("Authorization") String token );
 

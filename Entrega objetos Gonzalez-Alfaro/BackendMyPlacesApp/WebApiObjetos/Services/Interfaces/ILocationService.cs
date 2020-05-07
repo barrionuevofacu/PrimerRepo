@@ -28,5 +28,7 @@ namespace WebApiObjetos.Services.Interfaces
 
         Task<List<LocationDTO>> getLocationsInArea(string coordinates, int userId);
 
+        Task<bool> ContactInformador(int userId, int imageId);
+
     }
 }
