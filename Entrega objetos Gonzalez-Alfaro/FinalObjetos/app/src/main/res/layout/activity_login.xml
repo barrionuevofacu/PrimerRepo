@@ -52,6 +52,12 @@
             android:hint="Contraseña"
             android:inputType="textPassword" />
 
+        <RadioButton
+            android:id="@+id/RBSesion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mantener sesión iniciada" />
+
         <Button
             android:id="@+id/SaveButton"
             android:layout_width="match_parent"

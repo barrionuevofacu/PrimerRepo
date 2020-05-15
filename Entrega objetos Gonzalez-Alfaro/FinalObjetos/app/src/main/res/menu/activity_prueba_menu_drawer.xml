@@ -20,6 +20,10 @@
             android:id="@+id/myLocations"
             android:icon="@drawable/id_getlocations"
             android:title="@string/mis_publicaciones"/>
+        <item
+            android:id="@+id/cerrarSesion"
+            android:icon="@android:drawable/ic_lock_power_off"
+            android:title="Cerrar sesión"/>
 
     </group>
 

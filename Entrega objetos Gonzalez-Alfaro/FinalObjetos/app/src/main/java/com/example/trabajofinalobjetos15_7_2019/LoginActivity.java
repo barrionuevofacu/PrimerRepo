@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,8 @@ public class LoginActivity extends AppCompatActivity {
     private TextView userNameTextView;
     private TextView passwordTextView;
     private Api_Interface api;
+    private RadioButton RBsesion;
+    private boolean isActivateRadioButton;
     Button loginButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +34,26 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         userNameTextView = findViewById(R.id.tagTextView);
         passwordTextView = findViewById(R.id.passwordField);
+        RBsesion = (RadioButton) findViewById(R.id.RBSesion);
         loginButton = findViewById(R.id.SaveButton);
         loginButton.setEnabled(true);
         Button signInButton = findViewById(R.id.DeleteButton);
+
+        isActivateRadioButton = RBsesion.isChecked(); //DESACTIVADO
+
+        RBsesion.setOnClickListener(new View.OnClickListener() {
+            //ACTIVADO
+            @Override
+            public void onClick(View v) {
+                if(isActivateRadioButton){
+                    RBsesion.setChecked(false);
+                }
+                isActivateRadioButton = RBsesion.isChecked();
+            }
+        });
+        if(Preferences.obtenerPreferenceBoolean(this,Preferences.PREFERENCE_ESTADO_BUTTON_SESION)){
+            iniciarActividadSiguiente();
+        }
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +84,9 @@ public class LoginActivity extends AppCompatActivity {
                             Intent i = new Intent(LoginActivity.this, MapActivity.class);
                             String token = u.getToken();
                             String username = u.getUserName();
+                            Preferences.savePreferenceString(LoginActivity.this,username,Preferences.PREFERENCE_USUARIO_LOGIN);
+                            Preferences.savePreferenceString(LoginActivity.this,token,Preferences.PREFERENCE_USUARIO_TOKEN);
+                            Preferences.savePreferenceBoolean(LoginActivity.this,RBsesion.isChecked(),Preferences.PREFERENCE_ESTADO_BUTTON_SESION);
                             i.putExtra("Token", token);
                             i.putExtra("username", username);
                             startActivity(i);
@@ -95,5 +118,13 @@ public class LoginActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             userNameTextView.setText(data.getStringExtra("username"));
         }
+    }
+
+    public void iniciarActividadSiguiente(){
+        Intent i = new Intent(LoginActivity.this, MapActivity.class);
+        i.putExtra("username", Preferences.obtenerPreferenceString(this, Preferences.PREFERENCE_USUARIO_LOGIN));
+        i.putExtra("Token", Preferences.obtenerPreferenceString(this, Preferences.PREFERENCE_USUARIO_TOKEN));
+        startActivity(i);
+        finish();
     }
 }

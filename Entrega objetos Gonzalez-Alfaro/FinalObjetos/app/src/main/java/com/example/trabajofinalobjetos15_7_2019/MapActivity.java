@@ -423,10 +423,15 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
             getLocationsInArea();
         } else if (id == R.id.search){
             search();
-        } else if (id == R.id.myLocations){
+        } else if (id == R.id.myLocations) {
             vieneDePuntosEnArea = false;
             mMap.clear();
             drawFigures();
+        } else if (id == R.id.cerrarSesion){
+            Preferences.savePreferenceBoolean(MapActivity.this,false,Preferences.PREFERENCE_ESTADO_BUTTON_SESION);
+            Intent i = new Intent(MapActivity.this,LoginActivity.class);
+            startActivity(i);
+            finish();
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
