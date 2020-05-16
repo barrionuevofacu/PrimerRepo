@@ -277,12 +277,12 @@ public class LocationActivity extends AppCompatActivity implements AdapterView.O
                 call.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
-                        if (!response.isSuccessful()) {
-                            Toast toast = Toast.makeText(getApplicationContext(), "Unable to save Image", Toast.LENGTH_SHORT);
+                        if (response.body() == null) {
+                            Toast toast = Toast.makeText(getApplicationContext(), "Se envió un email", Toast.LENGTH_SHORT);
                             toast.show();
                             return;
                         }
-                        Toast toast = Toast.makeText(getApplicationContext(), "Unable to save Image", Toast.LENGTH_SHORT);
+                        Toast toast = Toast.makeText(getApplicationContext(), "Service failure", Toast.LENGTH_SHORT);
                         toast.show();
                     }
 
