@@ -23,7 +23,7 @@
         <item
             android:id="@+id/cerrarSesion"
             android:icon="@android:drawable/ic_lock_power_off"
-            android:title="Cerrar sesión"/>
+            android:title="@string/cerrarSesion"/>
 
     </group>
 
