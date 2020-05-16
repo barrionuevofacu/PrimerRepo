@@ -13,6 +13,7 @@ public class Preferences {
     public static final String STRING_PREFERENCES = "com.tesis.perrosPerdidos";
     public static final String PREFERENCE_ESTADO_BUTTON_SESION = "estado.button.sesion";
     public static final String PREFERENCE_USUARIO_LOGIN = "usuario.login";
+    public static final String PREFERENCE_PASSWORD_LOGIN = "password.login";
     public static final String PREFERENCE_USUARIO_TOKEN = "usuario.token";
 
     public static void savePreferenceBoolean(Context c, boolean b,String key){

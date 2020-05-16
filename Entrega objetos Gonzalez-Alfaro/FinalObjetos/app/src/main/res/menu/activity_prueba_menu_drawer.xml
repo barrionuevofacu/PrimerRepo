@@ -5,20 +5,20 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/search"
+            android:icon="@android:drawable/ic_menu_search"
+            android:title="@string/get_mi_perro"/>
+        <item
             android:id="@+id/Add_Location"
             android:icon="@drawable/ic_ping"
             android:title="@string/AddLocation" />
         <item
             android:id="@+id/getlocations"
-            android:icon="@drawable/id_getlocations"
+            android:icon="@android:drawable/ic_menu_mapmode"
             android:title="@string/get_locations"/>
         <item
-            android:id="@+id/search"
-            android:icon="@drawable/id_getlocations"
-            android:title="@string/get_mi_perro"/>
-        <item
             android:id="@+id/myLocations"
-            android:icon="@drawable/id_getlocations"
+            android:icon="@android:drawable/ic_menu_edit"
             android:title="@string/mis_publicaciones"/>
         <item
             android:id="@+id/cerrarSesion"

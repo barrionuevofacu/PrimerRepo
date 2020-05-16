@@ -52,65 +52,71 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         if(Preferences.obtenerPreferenceBoolean(this,Preferences.PREFERENCE_ESTADO_BUTTON_SESION)){
-            iniciarActividadSiguiente();
+            String user = Preferences.obtenerPreferenceString(this, Preferences.PREFERENCE_USUARIO_LOGIN);
+            String pass = Preferences.obtenerPreferenceString(this, Preferences.PREFERENCE_PASSWORD_LOGIN);
+            userNameTextView.setText(user);
+            passwordTextView.setText(pass);
+            RBsesion.setChecked(true);
+            obtenerToken(user, pass);
         }
+        else{
+            loginButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (TextUtils.isEmpty(userNameTextView.getText()) || TextUtils.isEmpty(passwordTextView.getText())) {
+                        Toast toast = Toast.makeText(getApplicationContext(), "Inserte usuario y contraseña", Toast.LENGTH_SHORT);
+                        toast.show();
+                    } else {
+                        loginButton.setEnabled(false);
+                        UserDTO user = new UserDTO(userNameTextView.getText().toString(), passwordTextView.getText().toString(), "", "");
+                        Retrofit retrofit = new Retrofit.Builder()
+                                .baseUrl(getResources().getString(R.string.base_Url))
+                                .addConverterFactory(GsonConverterFactory.create())
+                                .build();
+                        api = retrofit.create(Api_Interface.class);
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (TextUtils.isEmpty(userNameTextView.getText()) || TextUtils.isEmpty(passwordTextView.getText())) {
-                    Toast toast = Toast.makeText(getApplicationContext(), "Inserte usuario y contraseña", Toast.LENGTH_SHORT);
-                    toast.show();
-                } else {
-                    loginButton.setEnabled(false);
-                    UserDTO user = new UserDTO(userNameTextView.getText().toString(), passwordTextView.getText().toString(), "", "");
-                    Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl(getResources().getString(R.string.base_Url))
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build();
-                    api = retrofit.create(Api_Interface.class);
+                        Call<UserDTO> call = api.login(user);
+                        call.enqueue(new Callback<UserDTO>() {
+                            @Override
+                            public void onResponse(Call<UserDTO> call, Response<UserDTO> response) {
+                                loginButton.setEnabled(true);
+                                if (!response.isSuccessful()) {
+                                    Toast toast = Toast.makeText(getApplicationContext(), "Contraseña inválida", Toast.LENGTH_SHORT);
+                                    toast.show();
+                                    return;
+                                }
+                                UserDTO u = response.body();
+                                Intent i = new Intent(LoginActivity.this, MapActivity.class);
+                                String token = u.getToken();
+                                String username = u.getUserName();
+                                Preferences.savePreferenceString(LoginActivity.this,username,Preferences.PREFERENCE_USUARIO_LOGIN);
+                                Preferences.savePreferenceString(LoginActivity.this,u.getPassword(), Preferences.PREFERENCE_PASSWORD_LOGIN);
+                                Preferences.savePreferenceBoolean(LoginActivity.this,RBsesion.isChecked(),Preferences.PREFERENCE_ESTADO_BUTTON_SESION);
+                                i.putExtra("Token", token);
+                                i.putExtra("username", username);
+                                startActivity(i);
+                            }
 
-                    Call<UserDTO> call = api.login(user);
-                    call.enqueue(new Callback<UserDTO>() {
-                        @Override
-                        public void onResponse(Call<UserDTO> call, Response<UserDTO> response) {
-                            loginButton.setEnabled(true);
-                            if (!response.isSuccessful()) {
-                                Toast toast = Toast.makeText(getApplicationContext(), "Contraseña inválida", Toast.LENGTH_SHORT);
+                            @Override
+                            public void onFailure(Call<UserDTO> call, Throwable t) {
+                                loginButton.setEnabled(true);
+                                Toast toast = Toast.makeText(getApplicationContext(), "Falla de servicio", Toast.LENGTH_SHORT);
                                 toast.show();
                                 return;
                             }
-                            UserDTO u = response.body();
-                            Intent i = new Intent(LoginActivity.this, MapActivity.class);
-                            String token = u.getToken();
-                            String username = u.getUserName();
-                            Preferences.savePreferenceString(LoginActivity.this,username,Preferences.PREFERENCE_USUARIO_LOGIN);
-                            Preferences.savePreferenceString(LoginActivity.this,token,Preferences.PREFERENCE_USUARIO_TOKEN);
-                            Preferences.savePreferenceBoolean(LoginActivity.this,RBsesion.isChecked(),Preferences.PREFERENCE_ESTADO_BUTTON_SESION);
-                            i.putExtra("Token", token);
-                            i.putExtra("username", username);
-                            startActivity(i);
-                        }
+                        });
 
-                        @Override
-                        public void onFailure(Call<UserDTO> call, Throwable t) {
-                            loginButton.setEnabled(true);
-                            Toast toast = Toast.makeText(getApplicationContext(), "Falla de servicio", Toast.LENGTH_SHORT);
-                            toast.show();
-                            return;
-                        }
-                    });
-
+                    }
                 }
-            }
-        });
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(LoginActivity.this, SignInActivity.class);
-                startActivityForResult(i, 1);
-            }
-        });
+            });
+            signInButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(LoginActivity.this, SignInActivity.class);
+                    startActivityForResult(i, 1);
+                }
+            });
+        }
     }
 
     @Override
@@ -120,11 +126,42 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public void iniciarActividadSiguiente(){
+    public void iniciarActividadSiguiente(String token){
         Intent i = new Intent(LoginActivity.this, MapActivity.class);
         i.putExtra("username", Preferences.obtenerPreferenceString(this, Preferences.PREFERENCE_USUARIO_LOGIN));
-        i.putExtra("Token", Preferences.obtenerPreferenceString(this, Preferences.PREFERENCE_USUARIO_TOKEN));
+        i.putExtra("Token", token);
         startActivity(i);
         finish();
     }
+
+    public void obtenerToken(String username, String password){
+        UserDTO user = new UserDTO(username, password, "", "");
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(getResources().getString(R.string.base_Url))
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        api = retrofit.create(Api_Interface.class);
+        Call<UserDTO> call = api.login(user);
+        call.enqueue(new Callback<UserDTO>() {
+            @Override
+            public void onResponse(Call<UserDTO> call, Response<UserDTO> response) {
+                if (!response.isSuccessful()) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Contraseña inválida", Toast.LENGTH_SHORT);
+                    toast.show();
+                    return;
+                }
+                UserDTO u = response.body();
+                iniciarActividadSiguiente(u.getToken());
+            }
+
+            @Override
+            public void onFailure(Call<UserDTO> call, Throwable t) {
+                loginButton.setEnabled(true);
+                Toast toast = Toast.makeText(getApplicationContext(), "Falla de servicio", Toast.LENGTH_SHORT);
+                toast.show();
+                return;
+            }
+        });
+    }
+
 }
