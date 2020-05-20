@@ -86,7 +86,9 @@ namespace WebApiObjetos.Services
                         {
                             var user = userRepo.FindBy(x => x.Id == loc.UserId).Result.FirstOrDefault();
                             if (user.Email != null && !user.Email.Equals(""))
-                                EnviarMail(user.Email, "Quizás vieron a tu perro", "Un usuario subió una foto de un animal que se parece a tu perro. Vé a fijarte!");
+                                EnviarMail(user.Email, "Quizás vieron a tu perro", "Un usuario subió una foto de un perro similar al que estás buscando. \n" +
+                                    "Buscá la publicación con el id "+ loc.Id+" y chequeá si es el tuyo.\n" +
+                                    "Mucha suerte!");
                         }
                     }
                 }
@@ -113,7 +115,7 @@ namespace WebApiObjetos.Services
 
         public async Task<ImageDTO> AddImage(ImageDTO image)
         {
-            IamAuthenticator authenticator = new IamAuthenticator(apikey: "THrappn8HMg3bbxjUIFlyWDuJtN77Mbw-q1NWFuN6Ayc");
+            IamAuthenticator authenticator = new IamAuthenticator(apikey: "uvmbnqbNfHCOZTURNyfGewSeg814tZuHvk9SCGZpXlz9");
 
             VisualRecognitionService visualRecognition = new VisualRecognitionService("2018-03-19", authenticator);
             visualRecognition.SetServiceUrl("https://gateway.watsonplatform.net/visual-recognition/api");
@@ -141,7 +143,7 @@ namespace WebApiObjetos.Services
                         //url: "https://img.pixers.pics/pho_wat(s3:700/FO/48/14/15/73/700_FO48141573_3b497c03f0d6755bb5657b67149c578d.jpg,700,507,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,480,457,jpg)/vinilos-para-armario-alaskan-malamute-en-la-nieve.jpg.jpg",
                         imagesFilename: "MyTest.jpeg",
                         imagesFile: ms,
-                        classifierIds: new List<string>() { "razaperros_1652086664" },
+                        classifierIds: new List<string>() { "clasificaperros_1490634059" },
                         //threshold: 0.6f,
                         owners: new List<string>() { "me" }
                     );
@@ -207,6 +209,11 @@ namespace WebApiObjetos.Services
             catch(Exception e)
             {
                 Console.WriteLine("Error al enviar el mail");
+            }
+            finally
+            {
+                msg.Dispose();
+                cliente.Dispose();
             }
         }
 
