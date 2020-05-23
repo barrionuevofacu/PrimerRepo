@@ -144,7 +144,7 @@ namespace WebApiObjetos.Services
                         imagesFilename: "MyTest.jpeg",
                         imagesFile: ms,
                         classifierIds: new List<string>() { "clasificadorperros_69926380" },
-                        //threshold: 0.6f,
+                        threshold: 0.0f,
                         owners: new List<string>() { "me" }
                     );
                 }
