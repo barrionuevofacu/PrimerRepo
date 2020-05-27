@@ -60,6 +60,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
     private String currentPhotoPath;
     private int imageId;
     private String token;
+    Button saveSearchButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +69,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
         imageView = findViewById(R.id.imageView);
         camButton = findViewById(R.id.imageViewCam);
         tagTextView = findViewById(R.id.tagTextView);
-        Button saveSearchButton = findViewById(R.id.SaveButton);
+        saveSearchButton = findViewById(R.id.SaveButton);
 
         boolean isNew = getIntent().getBooleanExtra("isNew", true);
         colorSelection = (getIntent().getIntExtra("color", 0));
@@ -161,6 +162,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
             @Override
             public void onClick(View v) {
 
+                saveSearchButton.setEnabled(false);
                 if (!currentPhotoPath.isEmpty()) {
                     OkHttpClient okHttpClient = new OkHttpClient.Builder()
                             .connectTimeout(1, TimeUnit.MINUTES)
@@ -181,6 +183,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
                     call.enqueue(new Callback<ImageDTO>() {
                         @Override
                         public void onResponse(Call<ImageDTO> call, Response<ImageDTO> response) {
+                            saveSearchButton.setEnabled(true);
                             if (!response.isSuccessful()) {
                                 Toast toast = Toast.makeText(getApplicationContext(), "Unable to save Image", Toast.LENGTH_SHORT);
                                 toast.show();
@@ -198,6 +201,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 
                         @Override
                         public void onFailure(Call<ImageDTO> call, Throwable t) {
+                            saveSearchButton.setEnabled(true);
                             Toast toast = Toast.makeText(getApplicationContext(), "Service failure", Toast.LENGTH_SHORT);
                             toast.show();
                         }
