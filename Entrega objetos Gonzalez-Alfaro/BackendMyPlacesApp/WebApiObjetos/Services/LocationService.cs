@@ -143,7 +143,7 @@ namespace WebApiObjetos.Services
                         //url: "https://img.pixers.pics/pho_wat(s3:700/FO/48/14/15/73/700_FO48141573_3b497c03f0d6755bb5657b67149c578d.jpg,700,507,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,480,457,jpg)/vinilos-para-armario-alaskan-malamute-en-la-nieve.jpg.jpg",
                         imagesFilename: "MyTest.jpeg",
                         imagesFile: ms,
-                        classifierIds: new List<string>() { "clasificadorperros_69926380" },
+                        classifierIds: new List<string>() { "DefaultCustomModel_1975643640" },
                         threshold: 0.0f,
                         owners: new List<string>() { "me" }
                     );
