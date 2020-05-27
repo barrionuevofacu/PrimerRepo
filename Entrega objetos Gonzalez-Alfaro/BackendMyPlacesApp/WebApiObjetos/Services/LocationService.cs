@@ -113,7 +113,7 @@ namespace WebApiObjetos.Services
 
         public async Task<ImageDTO> AddImage(ImageDTO image)
         {
-            IamAuthenticator authenticator = new IamAuthenticator(apikey: "THrappn8HMg3bbxjUIFlyWDuJtN77Mbw-q1NWFuN6Ayc");
+            IamAuthenticator authenticator = new IamAuthenticator(apikey: "FwMOpgXBoVSnG4SYrbduANUaCfNq-m35b-9XxMoVnSYJ");
 
             VisualRecognitionService visualRecognition = new VisualRecognitionService("2018-03-19", authenticator);
             visualRecognition.SetServiceUrl("https://gateway.watsonplatform.net/visual-recognition/api");
