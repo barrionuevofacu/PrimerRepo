@@ -159,11 +159,12 @@ namespace WebApiObjetos.Services
                 razasAGuardar = razas.Count;
 
             Console.WriteLine(result1.Response);
+            razas = razas.OrderByDescending(o => o.Score).ToList();
             for (int i = 0; i < razasAGuardar; i++)
             {
                 var razaI = razas.ElementAt(i)._Class;
                 var porcentaje = razas.ElementAt(i).Score;
-                var raza = razaI.Split(".")[1];
+                var raza = razaI.Split(".")[0];
                 if (i == 0)
                     image.raza1 = raza;
                 else if (i == 1)
