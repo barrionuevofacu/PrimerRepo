@@ -528,7 +528,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
     }
     public void search(){
         activeMethod = 0;
-        Toast.makeText(getApplicationContext(), "Please select which location to search a dog", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Seleccione última ubicación que fue visto el perro", Toast.LENGTH_SHORT).show();
         setPolygonsClickable(false);
         setPolylinesClickable(false);
         confirmButton.setVisibility(View.VISIBLE);
@@ -548,7 +548,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
             @Override
             public void onClick(View v) {
                 if (pointsToAddList.isEmpty())
-                    Toast.makeText(getApplicationContext(), "Please select location to add", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Seleccione una ubicación", Toast.LENGTH_SHORT).show();
                 else
                     startSearchActivity(0, getResources().getColor(R.color.Map_Red), "New Tag", 0, token, true, 11);
             }
@@ -557,7 +557,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
 
     public void addLine() {
         activeMethod = 1;
-        Toast.makeText(getApplicationContext(), "Please select points of the line", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Seleccione los puntos de la línea", Toast.LENGTH_SHORT).show();
         setPolygonsClickable(false);
         setPolylinesClickable(false);
         confirmButton.setVisibility(View.VISIBLE);
@@ -574,7 +574,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                 if (pointsToAddList.size() > 1)
                     startLocationActivity(1, getResources().getColor(R.color.Map_Orange), "New Tag", 0, token, true, 1);
                 else
-                    Toast.makeText(getApplicationContext(), "Please select another point for the line", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Seleccione otro punto de la línea", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -673,7 +673,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                 @Override
                 public void onResponse(Call<List<LocationDTO>> call, Response<List<LocationDTO>> response) {
                     if (!response.isSuccessful()) {
-                        Toast.makeText(getApplicationContext(), "Error obtaining user locations", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Error obteniendo ubicaciones del usuario", Toast.LENGTH_SHORT).show();
                         return;
                     }
                     List<LocationDTO> locations = response.body();
@@ -701,7 +701,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
 
                 @Override
                 public void onFailure(Call<List<LocationDTO>> call, Throwable t) {
-                    Toast.makeText(getApplicationContext(), "Service failure", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Falla de servicio", Toast.LENGTH_SHORT).show();
                     return;
                 }
             });
@@ -712,7 +712,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
         switch (location.getType()) {
             case 0: {
                 Marker markerToAdd;
-                markerToAdd = mMap.addMarker(new MarkerOptions().position(getPoints(location.getCoordinates()).get(0)).title("Marker Title"));
+                markerToAdd = mMap.addMarker(new MarkerOptions().position(getPoints(location.getCoordinates()).get(0)).title("Tag"));
                 markerToAdd.setTag(location.getTag());
                 if (location.isSearch())
                     markerToAdd.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
@@ -781,7 +781,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                     @Override
                     public void onResponse(Call<LocationDTO> call, Response<LocationDTO> response) {
                         if (!response.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "Unable to save location", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Error al guardar ubicación", Toast.LENGTH_SHORT).show();
                             return;
                         }
                         confirmButton.setVisibility(View.INVISIBLE);
@@ -829,12 +829,12 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                         setPolygonsClickable(true);
                         setPolylinesClickable(true);
                         clearPointsList(pointsToAddList);
-                        Toast.makeText(getApplicationContext(), "Location Saved Successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Ubicación guardada exitosamente", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onFailure(Call<LocationDTO> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(), "Service failure", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Falla de servicio", Toast.LENGTH_SHORT).show();
                         return;
                     }
                 });
@@ -854,7 +854,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                     @Override
                     public void onResponse(Call<List<LocationDTO>> call, Response<List<LocationDTO>> response) {
                         if (!response.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "Unable to save location", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Error al guardar ubicación", Toast.LENGTH_SHORT).show();
                             return;
                         }
                         confirmButton.setVisibility(View.INVISIBLE);
@@ -879,7 +879,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
 
                     @Override
                     public void onFailure(Call<List<LocationDTO>> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(), "Service failure", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Falla de servicio", Toast.LENGTH_SHORT).show();
                         return;
                     }
                 });
@@ -941,7 +941,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
                             if (!response.isSuccessful()) {
-                                Toast.makeText(getApplicationContext(), "Unable to update location", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Error al actualizar ubicación", Toast.LENGTH_SHORT).show();
                                 return;
                             }
                             Toast.makeText(getApplicationContext(), response.body(), Toast.LENGTH_SHORT).show();
@@ -949,7 +949,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
 
                         @Override
                         public void onFailure(Call<String> call, Throwable t) {
-                            Toast.makeText(getApplicationContext(), "Service failure", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Falla de servicio", Toast.LENGTH_SHORT).show();
                             return;
                         }
                     });
@@ -985,7 +985,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
                             if (!response.isSuccessful()) {
-                                Toast.makeText(getApplicationContext(), "Unable to delete location", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Error al eliminar ubicación", Toast.LENGTH_SHORT).show();
                                 return;
                             }
                             Toast.makeText(getApplicationContext(), response.body(), Toast.LENGTH_SHORT).show();
@@ -995,7 +995,7 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
 
                         @Override
                         public void onFailure(Call<String> call, Throwable t) {
-                            Toast.makeText(getApplicationContext(), "Service failure", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Falla de servicio", Toast.LENGTH_SHORT).show();
                             return;
                         }
                     });
