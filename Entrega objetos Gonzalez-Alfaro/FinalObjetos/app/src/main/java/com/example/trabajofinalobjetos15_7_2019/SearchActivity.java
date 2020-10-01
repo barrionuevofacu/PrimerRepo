@@ -119,7 +119,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
             @Override
             public void onClick(View v) {
                 if (isStoragePermissionGranted()) {
-                    final CharSequence[] items = {"Take photo", "Select from gallery", "Cancel"};
+                    final CharSequence[] items = {"Cámara", "Galería", "Cancelar"};
                     AlertDialog.Builder builder = new AlertDialog.Builder(SearchActivity.this);
                     builder.setTitle("Add Photo!");
                     builder.setItems(items, new DialogInterface.OnClickListener() {
