@@ -67,7 +67,7 @@ public class SignInActivity extends AppCompatActivity {
                         @Override
                         public void onFailure(Call<UserDTO> call, Throwable t) {
                             signInButton.setEnabled(true);
-                            Toast toast = Toast.makeText(getApplicationContext(), "Service failure", Toast.LENGTH_SHORT);
+                            Toast toast = Toast.makeText(getApplicationContext(), "Falla de servicio", Toast.LENGTH_SHORT);
                             toast.show();
                             return;
                         }
