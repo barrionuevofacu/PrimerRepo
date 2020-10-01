@@ -62,7 +62,7 @@ public class PointsInAreaActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<LocationDTO>> call, Throwable t) {
-                Toast toast = Toast.makeText(getApplicationContext(), "Service failure", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(getApplicationContext(), "Falla de servicio", Toast.LENGTH_SHORT);
                 toast.show();
             }
         });
