@@ -95,7 +95,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
                 @Override
                 public void onResponse(Call<ImageDTO> call, Response<ImageDTO> response) {
                     if (!response.isSuccessful()) {
-                        Toast toast = Toast.makeText(getApplicationContext(), "No existing Image", Toast.LENGTH_SHORT);
+                        Toast toast = Toast.makeText(getApplicationContext(), "No existe la imagen", Toast.LENGTH_SHORT);
                         toast.show();
                         return;
                     }
@@ -107,7 +107,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
 
                 @Override
                 public void onFailure(Call<ImageDTO> call, Throwable t) {
-                    Toast toast = Toast.makeText(getApplicationContext(), "Service failure", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(getApplicationContext(), "Falla de servicio", Toast.LENGTH_SHORT);
                     toast.show();
                 }
             });
@@ -121,7 +121,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
                 if (isStoragePermissionGranted()) {
                     final CharSequence[] items = {"Cámara", "Galería", "Cancelar"};
                     AlertDialog.Builder builder = new AlertDialog.Builder(SearchActivity.this);
-                    builder.setTitle("Add Photo!");
+                    builder.setTitle("Agregar imagen");
                     builder.setItems(items, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int item) {
@@ -185,7 +185,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
                         public void onResponse(Call<ImageDTO> call, Response<ImageDTO> response) {
                             saveSearchButton.setEnabled(true);
                             if (!response.isSuccessful()) {
-                                Toast toast = Toast.makeText(getApplicationContext(), "Unable to save Image", Toast.LENGTH_SHORT);
+                                Toast toast = Toast.makeText(getApplicationContext(), "Error al guardar la imagen", Toast.LENGTH_SHORT);
                                 toast.show();
                                 return;
                             }
@@ -202,7 +202,7 @@ public class SearchActivity extends AppCompatActivity implements AdapterView.OnI
                         @Override
                         public void onFailure(Call<ImageDTO> call, Throwable t) {
                             saveSearchButton.setEnabled(true);
-                            Toast toast = Toast.makeText(getApplicationContext(), "Service failure", Toast.LENGTH_SHORT);
+                            Toast toast = Toast.makeText(getApplicationContext(), "Falla de servicio", Toast.LENGTH_SHORT);
                             toast.show();
                         }
                     });
