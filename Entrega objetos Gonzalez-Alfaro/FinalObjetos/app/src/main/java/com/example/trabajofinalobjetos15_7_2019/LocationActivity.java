@@ -123,7 +123,7 @@ public class LocationActivity extends AppCompatActivity implements AdapterView.O
                 @Override
                 public void onResponse(Call<ImageDTO> call, Response<ImageDTO> response) {
                     if (!response.isSuccessful()) {
-                        Toast toast = Toast.makeText(getApplicationContext(), "No existing Image", Toast.LENGTH_SHORT);
+                        Toast toast = Toast.makeText(getApplicationContext(), "No existe la imagen", Toast.LENGTH_SHORT);
                         toast.show();
                         return;
                     }
@@ -135,7 +135,7 @@ public class LocationActivity extends AppCompatActivity implements AdapterView.O
 
                 @Override
                 public void onFailure(Call<ImageDTO> call, Throwable t) {
-                    Toast toast = Toast.makeText(getApplicationContext(), "Service failure", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(getApplicationContext(), "Falla de servicio", Toast.LENGTH_SHORT);
                     toast.show();
                 }
             });
@@ -147,9 +147,9 @@ public class LocationActivity extends AppCompatActivity implements AdapterView.O
             @Override
             public void onClick(View v) {
                 if (isStoragePermissionGranted()) {
-                    final CharSequence[] items = {"Take photo", "Select from gallery", "Cancel"};
+                    final CharSequence[] items = {"Cámara", "Galería", "Cancelar"};
                     AlertDialog.Builder builder = new AlertDialog.Builder(LocationActivity.this);
-                    builder.setTitle("Add Photo!");
+                    builder.setTitle("Agregar imagen");
                     builder.setItems(items, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int item) {
@@ -222,7 +222,7 @@ public class LocationActivity extends AppCompatActivity implements AdapterView.O
                         @Override
                         public void onResponse(Call<ImageDTO> call, Response<ImageDTO> response) {
                             if (!response.isSuccessful()) {
-                                Toast toast = Toast.makeText(getApplicationContext(), "Unable to save Image", Toast.LENGTH_SHORT);
+                                Toast toast = Toast.makeText(getApplicationContext(), "Error al guardar la imagen", Toast.LENGTH_SHORT);
                                 toast.show();
                                 return;
                             }
@@ -239,7 +239,7 @@ public class LocationActivity extends AppCompatActivity implements AdapterView.O
 
                         @Override
                         public void onFailure(Call<ImageDTO> call, Throwable t) {
-                            Toast toast = Toast.makeText(getApplicationContext(), "Service failure", Toast.LENGTH_SHORT);
+                            Toast toast = Toast.makeText(getApplicationContext(), "Falla de servicio", Toast.LENGTH_SHORT);
                             toast.show();
                             saveLocationButton.setEnabled(true);
                         }
@@ -278,17 +278,17 @@ public class LocationActivity extends AppCompatActivity implements AdapterView.O
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
                         if (response.body() == null) {
-                            Toast toast = Toast.makeText(getApplicationContext(), "Se envió un email", Toast.LENGTH_SHORT);
+                            Toast toast = Toast.makeText(getApplicationContext(), "Se envió un email al informador", Toast.LENGTH_SHORT);
                             toast.show();
                             return;
                         }
-                        Toast toast = Toast.makeText(getApplicationContext(), "Service failure", Toast.LENGTH_SHORT);
+                        Toast toast = Toast.makeText(getApplicationContext(), "Falla de servicio", Toast.LENGTH_SHORT);
                         toast.show();
                     }
 
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
-                        Toast toast = Toast.makeText(getApplicationContext(), "Service failure", Toast.LENGTH_SHORT);
+                        Toast toast = Toast.makeText(getApplicationContext(), "Falla de servicio", Toast.LENGTH_SHORT);
                         toast.show();
                         saveLocationButton.setEnabled(true);
                     }
